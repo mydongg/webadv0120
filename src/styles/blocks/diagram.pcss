@@ -1,0 +1,37 @@
+.diagram{
+    position: relative;
+    width: 150px;
+    height: 150px;     
+    &__text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 18px;
+        color: rgba(#fff, 0.5);
+        max-width: 100px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    &__hole{
+        fill: transparent;
+    }
+
+    &__ring{
+        fill: transparent;
+        stroke: rgba(209, 154, 154, 0.1);
+        stroke-width: 1;
+    }
+
+    &__segment{
+        fill: transparent;
+        stroke:#d6831f;
+        stroke-width: 3;
+        stroke-dashoffset: 50;
+    }
+
+}
+
+
+  

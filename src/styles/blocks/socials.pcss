@@ -1,0 +1,33 @@
+.socials{
+    
+    &__svg{
+        fill: #736f6b;
+        height: 25px;
+        transition: $basetr;
+        display: block;
+    }
+
+    &__list{
+        display: flex;
+    }
+
+    &__link{
+        display: block;
+        padding: 10px;
+        margin: 10px 20px 10px 0;
+        transition: $basetr;
+        &:hover{
+            .socials__svg{
+                fill: $sthover;
+            }
+        }
+
+        &--rounded{
+            border-radius: 100%;
+            border: 1px solid #736f6b;
+            &:hover{
+                border-color: $sthover;
+            }
+        }
+    }
+}

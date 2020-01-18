@@ -1,0 +1,37 @@
+.arrow{
+    transition: $basetr;
+    cursor: pointer;
+    &--round{
+        padding: 20px;
+        margin: 0 10px;
+        border-radius: 100%;
+        border: 1px solid #fff;
+    }
+
+    &--sq{
+        background-color: #353e4e;
+        padding: 17.5px;
+    }
+
+    &:hover{
+        border-color: $sthover;
+        .arrow__svg{
+            fill: $sthover;
+        }
+    }
+    &--left{
+        transform: rotate(180deg);
+    }
+    
+    &__svg{
+        fill: #fff;
+        display: block;
+        height: 15px;
+        width: 15px;
+        transition: $basetr;
+    }
+
+    &__outer{
+        display: flex;
+    }
+}

@@ -1,0 +1,51 @@
+.section{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    position: relative;
+
+    &--intermediate{
+        height: 50vh;
+    }
+
+    &--auto{
+        height: auto;
+        min-height: 600px;
+    }
+
+    &--about{
+        background-image: url('../images/content/aboutbg.png');
+        background-size: cover;
+    }
+
+    &--skills{
+        background-image: url('../images/content/skillsbg.png');
+        background-size: cover;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    &--relative{
+        position: relative;
+    }
+}
+
+.doubleSection{
+    background-image: url('../images/content/doublebg.png');
+    background-size: cover;
+    position: relative;
+}
+
+// Дополнительные БГ элементы
+
+.leaves{
+    position: absolute;
+    right: 0;
+    top: -20vh;
+}
+
+.arms{
+    position: absolute;
+    bottom: -7vh;
+    left: 0;
+}

@@ -1,0 +1,53 @@
+.feedback{
+    max-width: 60%;
+    margin-bottom: 100px;
+    &__row{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__field{
+        border-bottom: 2px solid #fff;
+        margin-bottom: 40px;
+        &--smol{
+            width: 40%;
+        }
+    }
+
+    &__title{
+        color: rgba(255, 255, 255, 0.302);
+        margin-bottom: 20px;
+    }
+
+    &__input{
+        background: transparent;
+        border: 0;
+        font-size: 18px;
+        color: #fff;
+        padding: 15px;
+        outline: none;
+        line-height: 1.5;
+        &:focus{
+            .feedback__svg{
+                fill: $sthover;
+            }
+            .feedback__field  {
+                border-color: $sthover;
+            }
+        }
+        &--textarea{
+            resize: none;
+            overflow: hidden;
+        }
+        width: 80%;
+    }
+
+    &__svg{
+        height: 30px;
+        fill: rgba(255, 255, 255, 0.302);
+        vertical-align: middle;
+    }
+}
+
+
+  

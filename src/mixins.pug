@@ -5,3 +5,30 @@ mixin icon(name, className)
 
 mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
+
+
+//- Default +nav("nav", ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
+mixin nav(className, items)
+  nav(class=`${className}`)
+    ul(class=`${className}__list`)
+      each item in items
+        li(class=`${className}__item`)
+          a(class=`${className}__link`)= item
+
+mixin socials(items, mod)
+  .socials
+    ul.socials__list 
+      each item in items
+        li.socials__item
+          a.socials__link(href='#' class=`socials__link--${mod}`)
+            +icon(item, "socials__svg")
+
+
+mixin diagram(percent, text)
+  - var rest = 100 - percent;
+  .diagram
+    .diagram__text #{text}
+    svg.diagram__svg(viewbox="0 0 42 42")
+      circle.diagram__hole(cx="21" cy="21" r="15.91549430918954")
+      circle.diagram__ring(cx="21" cy="21" r="15.91549430918954")
+      circle.diagram__segment(cx="21" cy="21" r="15.91549430918954" stroke-dasharray=`${percent} ${rest}`)

@@ -1,8 +1,15 @@
 {
-  "text-color": "#414c63",
-  "links-color": "#4b6fd7",
+  "text-color": "#ffffff",
+  "scrolldown": "#9ea0a1",
+  "basetr": ".3s",
+  "opgrey": "rgba(#fff, 0.5)",
+  "opshadow": "rgba(#fff, 0.15)",
+  "sthover": "#ff9a00",
+  "href": "#4b6fd7",
+  "font": "#2d3c4e",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",
   "bp-tablets": "768px",
   "bp-phones": "480px"
 }
+

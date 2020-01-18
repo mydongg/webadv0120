@@ -1,0 +1,30 @@
+.link{
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: $href;
+    position: relative;
+    &__svg{
+        fill: $href;
+        height: 15px;
+        width: 15px;
+        margin-right: 20px;
+    }
+
+    &:hover{
+        &::after{
+            width: 100%;
+        }
+    }
+
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        transition: $basetr;
+        height: 2px;
+        background-color: $href;
+    }
+}
