@@ -1,0 +1,38 @@
+section.section
+      .wrapper
+        .sectionTitle.sectionTitle--margin.sectionTitle--grey Мои работы
+        .content
+          .slider
+            .slider__left
+              .slider__display
+                +image("content/previews/1.jpg","slider__displayPic")
+                .slider__slides
+                  -var previews = ['1','2','3']
+                  -var current = '2'
+                  ul.sl
+                    each pv in previews
+                      if pv == current
+                        li.sl__item.sl__item--current
+                          +image(`content/previews/${pv}.jpg`,"sl__img")
+                          .sl__reactive
+                      else
+                        li.sl__item
+                          +image(`content/previews/${pv}.jpg`,"sl__img")
+                          .sl__reactive
+                .slider__arrows
+                  .arrow.arrow--left.arrow--sq
+                    +icon('arrow-down', 'arrow__svg')
+                  .arrow.arrow--right.arrow--sq
+                    +icon('arrow-down', 'arrow__svg')
+                .slider__number 2
+            .slider__right
+              .slider__tags
+                ul.tags
+                  li.tags__item HTML
+                  li.tags__item CSS
+                  li.tags__item JavaScript 
+              .article
+                .article__title Сайт школы образования
+                .article__text Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, rerum, at cupiditate provident debitis quis est tempore tempora corrupti fugit fugiat excepturi quidem earum ab.
+              .slider__link
+                include ../blocks/link.pug

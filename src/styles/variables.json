@@ -1,8 +1,7 @@
 {
   "text-color": "#ffffff",
-  "scrolldown": "#9ea0a1",
   "basetr": ".3s",
-  "opgrey": "rgba(#fff, 0.5)",
+  "opgrey": "#736f6b",
   "opshadow": "rgba(#fff, 0.15)",
   "sthover": "#ff9a00",
   "href": "#4b6fd7",

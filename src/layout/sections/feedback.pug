@@ -1,0 +1,18 @@
+section.section.section--auto
+        .wrapper
+          .sectionTitle.sectionTitle--margin Связаться со мной
+          form.feedback(action="")
+            .feedback__row
+              .feedback__field.feedback__field--smol
+                .feedback__title Введите ваше имя
+                .feedback__inputWrapper.feedback__inputWrapper--user
+                  input.feedback__input(type="text" placeholder="Станислав Савиных")
+              .feedback__field.feedback__field--smol
+                .feedback__title Введите ваш Email
+                .feedback__inputWrapper.feedback__inputWrapper--email
+                  input.feedback__input(type="text" placeholder="myemail@site.com")
+            .feedback__field
+                .feedback__title Сообщение к письму
+                .feedback__inputWrapper.feedback__inputWrapper--message
+                  textarea.feedback__input.feedback__input--textarea(name="" placeholder="Привет! Нужна помощь в создании сайта.")
+            button.button Отправить

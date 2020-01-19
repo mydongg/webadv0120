@@ -14,6 +14,8 @@
         color: $opgrey;
         line-height: 1.8;
         margin-bottom: 30px;
+        max-height: 350px;
+        overflow: hidden;
     }
 
     &__author{
@@ -27,10 +29,17 @@
     &__name{
         font-size: 18px;
         line-height: 2.5;
+        white-space: nowrap;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__position{
         color: rgba(255, 255, 255, 0.302);
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

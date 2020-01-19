@@ -6,19 +6,25 @@
         margin: 0 10px;
         border-radius: 100%;
         border: 1px solid #fff;
+
+        &:hover{
+            border-color: $sthover;
+            .arrow__svg{
+                fill: $sthover;
+            }
+        }
     }
 
     &--sq{
         background-color: #353e4e;
         padding: 17.5px;
-    }
 
-    &:hover{
-        border-color: $sthover;
-        .arrow__svg{
-            fill: $sthover;
+        &:hover{
+            background-color: $sthover;
         }
     }
+
+    
     &--left{
         transform: rotate(180deg);
     }

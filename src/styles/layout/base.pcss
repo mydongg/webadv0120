@@ -25,36 +25,29 @@ body {
   min-height: 100%;
   position: relative;
   width: 95%;
-  &--center{
-    max-width: 1480px;
-    margin: 0 auto;
-  }
+  max-width: 1480px;
+
+  margin: 0 auto;
   &--flex{
     display: flex;
   }
+}
 
-  &--flexCenter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
   margin: 0 auto;
   max-width: 1480px;
   width: 95%;
-  // width: 1490px;
 
   @include phones {
     width: 85%;
   }
-}
-
-.fullscreen-section {
-  height: 100vh;
-  min-height: 650px;
 }
 
 button {

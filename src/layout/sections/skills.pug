@@ -1,0 +1,21 @@
+section.section.section--skills.section--relative
+      +image("content/arms.png","arms")
+      .wrapper 
+        .flexColumn
+          .desc
+            .sectionTitle.sectionTitle--margin Чем я могу быть полезен вам
+            .desc__text Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repellendus, quam at dignissimos repellat doloremque in inventore tempore tempora voluptate voluptas voluptatum necessitatibus earum. Iste?
+
+          .skills
+            .field
+              .field__title Front-end
+              .field__diags
+                -var techs = [[55,"HTML5"],[41,"CSS3"],[22,"JavaScript"],[94,"Vue"]]
+                each tech in techs
+                  +diagram(tech[0], tech[1])
+            .field
+              .field__title Workflow
+              .field__diags
+                -var techs = [[19,"Git"],[99,"Terminal"],[74,"Gulp"],[49,"Webpack"]]
+                each tech in techs
+                  +diagram(tech[0], tech[1])
