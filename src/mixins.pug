@@ -6,7 +6,10 @@ mixin icon(name, className)
 mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
 
+mixin source(path, className)
+  source(srcset=require(`images/${path}`) class=className)
 
+  
 //- Default +nav("nav", [{"Главная", "start"}, {"Обо мне", "about"}, {"Навыки", "skills"}, {"Работы","works"}, {"Отзывы", "reviews"}, {"Связаться", "feedback"}])
 mixin nav(className, items, mod)
   nav(class=`${className} ${className}${mod}`)

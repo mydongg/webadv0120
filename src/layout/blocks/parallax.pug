@@ -1,8 +1,9 @@
 .parallax
     .parallax__static
-    .parallax__full
+    picture.parallax__full
         .parallax__layer(data-speed="0.1")
-            +image('parallax/par1.png','parallax__img parallax__img--1')
+            //- +image('parallax/par1.png','parallax__img parallax__img--1')
+            +source('parallax/par1.png','parallax__img parallax__img--1')
         .parallax__layer(data-speed="0.2")
             +image('parallax/par2.png','parallax__img parallax__img--2')
         .parallax__layer(data-speed="0.25")
