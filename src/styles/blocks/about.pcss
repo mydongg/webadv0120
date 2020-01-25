@@ -2,9 +2,14 @@
     display: flex;
     align-self: center;
     font-weight: bold;
-    min-width: 900px;
+
+    &__left{
+        margin-bottom: 50px;
+    }
+
     &__right{
         margin-left: 113px;
+        margin-right: 72px;
     }
 
     // Текст правой части
@@ -32,6 +37,21 @@
         margin: 0 51px 51px;
     }
     
+
+    @include tablets{
+        
+        &__right{
+            margin-right: 0;
+        }
+    }
+
+    @include phones{
+        flex-direction: column;
+
+        &__right{
+            margin-left: 0;
+        }
+    }
 }
 
   

@@ -1,0 +1,40 @@
+.menubutton{
+    display: block;
+    height: 24px;
+    width: 24px;
+    display: none;
+    &__img{
+
+        position: relative;
+        height: 4px;
+        width: 24px;
+        background-color: #fff;
+        margin: 10px 0;
+
+        &::before{
+            position: absolute;
+            display: block;
+            content: '';
+            height: 4px;
+            width: 24px;
+            background-color: #fff;
+            top: -8px;
+            left: 0;
+        }
+
+        &::after{
+            position: absolute;
+            display: block;
+            content: '';
+            height: 4px;
+            width: 24px;
+            background-color: #fff;
+            top:8px;
+            left: 0;
+        }
+    }
+
+    @include tablets{
+         display: block;
+    }
+}

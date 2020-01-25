@@ -1,8 +1,8 @@
 .title{
     display: flex;
     position: absolute;
-    top: 53%;
-    left: 45%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%,-50%);
     &__h1{
         font-size: 72px;
@@ -13,6 +13,14 @@
         min-width: 300px;
         text-align: right;
         opacity: 0.4;
+    }
+
+    @include tablets(){
+        flex-direction: column;
+        text-align: center;
+        &__h2{
+            text-align: center;
+        }
     }
 }
   

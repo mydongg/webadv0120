@@ -29,6 +29,10 @@
     &--relative{
         position: relative;
     }
+
+    @include tablets{
+
+    }
 }
 
 .doubleSection{
@@ -43,10 +47,20 @@
     position: absolute;
     right: 0;
     top: -20vh;
+    pointer-events: none;
+
+    @include phones(){
+        display: none;
+    }
 }
 
 .arms{
     position: absolute;
     bottom: -7vh;
     left: 0;
+
+
+    @include tablets{
+        
+    }
 }

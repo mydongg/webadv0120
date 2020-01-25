@@ -1,6 +1,8 @@
 .feedback{
     max-width: 60%;
     margin-bottom: 100px;
+    // display: flex;
+    // flex-direction: column;
     &__row{
         display: flex;
         justify-content: space-between;
@@ -9,7 +11,7 @@
     &__field{
         margin-bottom: 40px;
         &--smol{
-            width: 40%;
+            width: 48%;
         }
     }
 
@@ -100,7 +102,20 @@
 
         
     }
+
+    @include tablets(){
+        max-width: 100%;
+        align-items: center;
+    }
+    
+    @include phones(){
+        &__row{
+            flex-direction: column;
+        }
+
+        &__field--smol{
+            width: 100%;
+        }
+    }
 }
-
-
   

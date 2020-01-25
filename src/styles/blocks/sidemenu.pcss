@@ -1,0 +1,32 @@
+.sidemenu{
+    position: fixed;
+    top: 0;
+    right: -700px;
+    height: 100vh;
+    width: 320px;
+    background-color: #fff;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: right $basetr;
+    &__close{
+        position: absolute;
+        top: 60px;
+        right: 40px;
+        display: block;
+        height: 24px;
+        width: 24px;
+    }
+    &__remove{
+        fill: $opgrey;
+    }
+
+    &--open{
+        right: 0;
+    }
+
+    @include phones{
+        width: 100%;
+    }
+}

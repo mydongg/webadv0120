@@ -12,4 +12,12 @@
         font-weight: 700;
         white-space: nowrap;
     }
+
+    @include tablets(){
+        justify-content: center;
+    }
+
+    @include phones(){
+        justify-content: flex-start;
+    }
 }

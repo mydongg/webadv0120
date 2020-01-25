@@ -4,4 +4,13 @@
     &__text{
         color: rgba(255, 255, 255, 0.502);
     }
+
+    @include tablets{
+        max-width: 75%;
+        text-align: center;
+    }
+
+    @include phones{
+        max-width: 100%;
+    }
 }

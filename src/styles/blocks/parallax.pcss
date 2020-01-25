@@ -3,6 +3,54 @@
     height: 150vh;
     width: 100vw;
     max-width: 100%;
-    background-image: url('../images/content/train.jpg');
-    background-size: cover;
+    &__static{
+        position: absolute;
+        display: none;
+        height: 100%;
+        width: 100%;
+        background-image: url('../images/content/train.jpg');
+        background-size: cover;
+    }
+
+    &__layer{
+        position: absolute;
+
+        &--2{
+            top: 25vh;
+        }
+
+        &--3{
+            top: 30vh;
+        }
+
+        &--4{
+            bottom: 0;
+        }
+
+        &--5{
+            bottom: 0;
+        }
+
+    }
+
+
+    @include desktopHd{
+        &__static{
+            display: none;
+        }
+        &__full{
+            display: block;
+        }
+    }
+
+
+    @include tablets{
+        &__full{
+            display: none;
+        }
+
+        &__static{
+            display: block;
+        }
+    }
 }
