@@ -1,13 +1,15 @@
 .parallax
     .parallax__static
     .parallax__full
-        .parallax__layer.parallax__layer--1
-            +image('parallax/par1.png','parallax__img')
-        .parallax__layer.parallax__layer--2
-            +image('parallax/par2.png','parallax__img')
-        .parallax__layer.parallax__layer--3
-            +image('parallax/par3.png','parallax__img')
-        .parallax__layer.parallax__layer--4
-            +image('parallax/par4.png','parallax__img')
-        .parallax__layer.parallax__layer--5
-            +image('parallax/shadow.png','parallax__img')
+        .parallax__layer(data-speed="0.1")
+            +image('parallax/par1.png','parallax__img parallax__img--1')
+        .parallax__layer(data-speed="0.2")
+            +image('parallax/par2.png','parallax__img parallax__img--2')
+        .parallax__layer(data-speed="0.25")
+            +title(`title--parallax`)
+        .parallax__layer(data-speed="0.3")
+            +image('parallax/par3.png','parallax__img parallax__img--3')
+        .parallax__layer(data-speed="0.4")
+            +image('parallax/par4.png','parallax__img parallax__img--4')
+        .parallax__shadow
+            +image('parallax/shadow.png','parallax__img parallax__img--5')

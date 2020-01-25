@@ -1,11 +1,11 @@
 .nav{
+    line-height: 3;
     &__list{
         display: flex;
         flex-wrap: wrap;
     }
 
     &__item{
-        padding: 30px;
         max-width: 200px;
         overflow: hidden;
         white-space: nowrap;
@@ -13,33 +13,36 @@
     }
 
     &__link{
+        display: block;
+        text-decoration: none;
+        padding: 30px;
         position: relative;
         transition: $basetr;
         &:hover{
             color: $sthover;
-            &::after{
-                width: 100%;
-            }
         }
 
-        &::after{
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            transition: $basetr;
-            height: 2px;
-            background-color: $sthover;
+        &--side{
+            padding: 0 30px;
         }
     }
-
+    
     &--side{
         color: $opgrey;
         font-size: 18px;
-        line-height: 3;
+ 
         font-weight: 700;
         margin-bottom: 40px;
+        .nav__list{
+            flex-direction: column;
+        }
+    }
+
+    @include phones{
+        &__link{
+            padding: 0;
+            padding-right: 30px;
+        }
     }
 }
 

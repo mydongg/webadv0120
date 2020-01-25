@@ -1,5 +1,6 @@
 .parallax{
     position: absolute;
+    overflow: hidden;
     height: 150vh;
     width: 100vw;
     max-width: 100%;
@@ -14,25 +15,39 @@
 
     &__layer{
         position: absolute;
+        height: 150vh;
+        width: 150vw;
+        left: -25vw;
+        top: -25vh;
+    }
+
+    &__img{
+        position: absolute;
+
+        &--1{
+            // top: 10%;
+        }
 
         &--2{
-            top: 25vh;
+            top: 53vh;
         }
 
         &--3{
-            top: 30vh;
+            top: 66vh;
         }
 
         &--4{
-            bottom: 0;
+            top: 105vh;
         }
 
         &--5{
             bottom: 0;
         }
 
+    &__shadow{
+            bottom: 0;
+        }
     }
-
 
     @include desktopHd{
         &__static{
@@ -45,6 +60,7 @@
 
 
     @include tablets{
+        height: 100vh;
         &__full{
             display: none;
         }

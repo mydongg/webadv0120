@@ -31,6 +31,10 @@ body {
   &--flex{
     display: flex;
   }
+
+  @include phones {
+    width: 85%;
+  }
 }
 
 .flexColumn{
@@ -38,16 +42,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 1480px;
-  width: 95%;
-
-  @include phones {
-    width: 85%;
-  }
 }
 
 button {

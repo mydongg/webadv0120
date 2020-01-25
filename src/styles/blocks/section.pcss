@@ -23,7 +23,6 @@
         background-image: url('../images/content/skillsbg.png');
         background-size: cover;
         height: auto;
-        min-height: 100vh;
     }
 
     &--relative{
@@ -31,7 +30,10 @@
     }
 
     @include tablets{
-
+        &--intermediate{
+            display: none;
+        }
+    
     }
 }
 
@@ -56,11 +58,12 @@
 
 .arms{
     position: absolute;
+    max-width: 100%;
     bottom: -7vh;
     left: 0;
-
-
     @include tablets{
-        
+        display: none;
     }
+
+    
 }

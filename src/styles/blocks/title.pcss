@@ -1,5 +1,5 @@
 .title{
-    display: flex;
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,11 +15,30 @@
         opacity: 0.4;
     }
 
+    &--parallax{
+        display: flex;
+        max-width: 30%;
+    }
+    
     @include tablets(){
         flex-direction: column;
         text-align: center;
         &__h2{
             text-align: center;
+        }
+
+        &--static{
+            display: flex;
+        }
+    }
+
+    @include phones{
+        &__h1{
+            font-size: 50px;
+        }
+
+        &__h2{
+            
         }
     }
 }

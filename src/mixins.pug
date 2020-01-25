@@ -7,13 +7,13 @@ mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
 
 
-//- Default +nav("nav", ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
-mixin nav(className, items)
-  nav(class=`${className}`)
+//- Default +nav("nav", [{"Главная", "start"}, {"Обо мне", "about"}, {"Навыки", "skills"}, {"Работы","works"}, {"Отзывы", "reviews"}, {"Связаться", "feedback"}])
+mixin nav(className, items, mod)
+  nav(class=`${className} ${className}${mod}`)
     ul(class=`${className}__list`)
-      each item in items
+      each item, index in items
         li(class=`${className}__item`)
-          a(class=`${className}__link`)= item
+          a(class=`${className}__link ${className}__link${mod}` href=`${index}`)= item
 
 mixin socials(items, mod)
   .socials
@@ -37,3 +37,9 @@ mixin diagram(percent, text)
 mixin scrolldown(idname)
     a.scrolldown(id=`${idname}`) Скролл
         +icon("scroll", "scrolldown__svg")
+
+
+mixin title(mod)
+    .title(class=`${mod}`)
+        h2.title__h2 Личный сайт веб разработчика
+        h1.title__h1 Станислав 	&nbsp;Савиных
