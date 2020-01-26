@@ -8,4 +8,14 @@
     &__arrows{
         margin-left: 70px;
     }
+
+    @include phones{
+        &__top{
+            flex-direction: column;
+        }
+
+        &__arrows{
+            margin: 50px auto 0;
+        }
+    }
 }

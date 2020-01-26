@@ -51,7 +51,7 @@
     }
 
 
-    @include tablets(){
+    @include tablets{
         flex-direction: column;
         align-items: center;
         &__right{
@@ -60,10 +60,22 @@
         }
     }
 
-    @include phones(){
+    @include phones{
+
+        &__left{
+            width: 100%;
+            padding: 0;
+            min-width: auto;
+        }
+
         &__right{
             width: 100%;
             text-align: left;
+        }
+
+        &__arrows{
+            right: 0px;
+            bottom: 0;
         }
     }
 }
