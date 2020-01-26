@@ -1,0 +1,27 @@
+script(type="text/x-template")#skills-list
+    .skills
+        .skills__item(v-for="skill in skills")
+            skills-row(
+                :skill="skill"
+            )
+
+
+script(type="text/x-template")#skills-row
+    .field
+        .field__title {{skill.skillsGroup}}
+        .field__diags
+            .field__item(v-for="skillPercent, skillName in skill.skills")
+                skill(
+                    :percent="skillPercent"
+                    :name="skillName"
+                )
+            
+
+script(type="text/x-template")#skill
+    .diagram
+        .diagram__text {{name}}
+        svg.diagram__svg(viewbox="0 0 42 42")
+            circle.diagram__hole(cx="21" cy="21" r="15.91549430918954")
+            circle.diagram__ring(cx="21" cy="21" r="15.91549430918954")
+            circle.diagram__segment(cx="21" cy="21" r="15.91549430918954" stroke-dasharray=`50`
+            ref="color-segment")

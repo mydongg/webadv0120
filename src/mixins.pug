@@ -26,7 +26,6 @@ mixin socials(items, mod)
           a.socials__link(href='#' class=`socials__link--${mod}`)
             +icon(item, "socials__svg")
 
-
 mixin diagram(percent, text)
   - var rest = 100 - percent;
   .diagram
@@ -35,7 +34,6 @@ mixin diagram(percent, text)
       circle.diagram__hole(cx="21" cy="21" r="15.91549430918954")
       circle.diagram__ring(cx="21" cy="21" r="15.91549430918954")
       circle.diagram__segment(cx="21" cy="21" r="15.91549430918954" stroke-dasharray=`${percent} ${rest}`)
-
 
 mixin scrolldown(idname)
     a.scrolldown(id=`${idname}`) Скролл
