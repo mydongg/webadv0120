@@ -12,7 +12,7 @@
                 background-color: rgba($sthover, 0.5);
             }
         }
-        &--current{
+        &_current{
             .sl__reactive{
                 outline: 3px solid $sthover;
             }
@@ -26,10 +26,9 @@
         height: 100%;
         top: 0;
         left: 0;
-        transition: $basetr;
+        transition: background-color $basetr;
         z-index:1;
     }
-
 
     @include phones{
         display: none;
