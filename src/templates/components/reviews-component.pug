@@ -1,0 +1,40 @@
+script(type="text/x-template")#reviews-container
+        .reviews
+            .reviews__top
+              .sectionTitle Что обо мне говорят
+              .reviews__arrows
+                arrows(
+                    @previous="previous",
+                    @next="next"
+                )
+
+            .reviews__bottom
+                .carousel
+                    flickity(ref="flickity" :options="flickityOptions")
+                        .carousel__cell(v-for="review in reviews")
+                            item(
+                                :item = "review"
+                            )
+
+
+script(type="text/x-template")#reviews-arrows
+            .arrow__outer
+                  a.arrow.arrow--left.arrow--round(href="#" @click.prevent="$emit('previous', 'previous')")
+                    +icon('arrow-down', 'arrow__svg')
+                  a.arrow.arrow--right.arrow--round(href="#" @click.prevent="$emit('next', 'next')")
+                    +icon('arrow-down', 'arrow__svg')
+
+
+
+script(type="text/x-template")#reviews-item
+            .rewievItem
+                      .rewievItem__quote
+                        +icon('quote','rewievItem__svg')
+                      .rewievItem__body
+                        .rewievItem__text {{item.text}}
+                        .rewievItem__author
+                          .avatar.avatar--smol
+                            img(:src="item.pic" class="avatar__img")
+                          .rewievItem__authInfo
+                            .rewievItem__name {{item.name}}
+                            .rewievItem__position {{item.occ}} 
