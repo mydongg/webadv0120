@@ -1,13 +1,9 @@
 .carousel{
     position: relative;
-    width: 900px;
+    max-width: 900px;
     overflow: hidden;
-    &__inner{
-        position: absolute;
-        display: flex;
-    }
     &__cell{
-        width: 450px;
+        width: 50%;
     }
 
     @include tablets{
@@ -15,6 +11,8 @@
     }
 
     @include phones{
-        
+        &__cell{
+            width: 100%;
+        }
     }
 }
