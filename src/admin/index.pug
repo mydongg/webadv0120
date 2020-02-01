@@ -6,6 +6,11 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Portfolio | admin
   body
-    .wrapper.admin-wrapper
-      .maincontent
-        #app-root
+    section.admin
+    //- кидаемся иконками
+    - var tick = require(`../images/icons/tick.svg`);
+    - var tick = require(`../images/icons/remove.svg`);
+    - var tick = require(`../images/icons/trash.svg`);
+    - var tick = require(`../images/icons/pencil.svg`);
+      //- закончили кидаться
+      #app-root

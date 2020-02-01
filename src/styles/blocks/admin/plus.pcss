@@ -1,0 +1,23 @@
+.plus{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    background: rgb(27,92,227);
+    background: linear-gradient(90deg, rgba(27,92,227,1) 0%, rgba(63,53,203,1) 100%);
+    border-radius: 100%;
+    &--smol{
+        width: 30px;
+        height: 30px;
+        .plus__inner{
+            font-size: 20px;
+        }
+    }
+
+    &__inner{
+        position: absolute;
+        font-size: 40px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+}

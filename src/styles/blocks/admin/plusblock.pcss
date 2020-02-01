@@ -1,0 +1,39 @@
+.plusblock{
+    background: rgb(27,92,227);
+    background: linear-gradient(90deg, rgba(27,92,227,1) 0%, rgba(63,53,203,1) 100%);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &__plus{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 80px;
+        font-weight: 100;
+    }
+
+    &__round{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+        border: 3px solid #fff;
+    }
+    &__text{
+        position: absolute;
+        bottom: -35%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        max-width: 150px;
+    }
+}
+
+
+// .plusblock
+//   .plusblock__plus +
+//   .plusblock__round
+//      .plusblock__text Добавить

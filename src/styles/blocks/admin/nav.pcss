@@ -1,0 +1,33 @@
+.nav{
+    
+    &__list{
+        display: flex;
+    }
+
+    &__item{
+        &--current{
+            .nav__link{
+                color: $href;
+                border-color: $href;
+            }
+        }
+    }
+
+    &__link{
+        display: block;
+        padding: 30px;
+        text-decoration: none;
+        color: $font;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+        transition: $basetr;
+        &:hover{
+            color: $href;
+            border-color: $href;
+        }
+
+        
+    }
+}
+
+  
