@@ -24,9 +24,17 @@
         &:hover{
             color: $href;
             border-color: $href;
+        }       
+    }
+
+    @include phones{
+        &__list{
+            justify-content: center;
         }
 
-        
+        &__link{
+            padding: 30px 20px;
+        }
     }
 }
 

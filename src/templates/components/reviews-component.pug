@@ -19,7 +19,7 @@ script(type="text/x-template")#reviews-container
 
 script(type="text/x-template")#reviews-arrows
             .arrow__outer
-                  a.arrow.arrow--left.arrow--round(href="#" @click.prevent="$emit('previous', 'previous')")
+                  a.arrow.arrow--left.arrow--round(href="#" @click.prevent="$emit('previous', 'previous')" :disabled="1==1")
                     +icon('arrow-down', 'arrow__svg')
                   a.arrow.arrow--right.arrow--round(href="#" @click.prevent="$emit('next', 'next')")
                     +icon('arrow-down', 'arrow__svg')
