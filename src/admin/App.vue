@@ -212,7 +212,7 @@
             .addreview__left
                 .addreview__avatar
                   .avatar
-                    img.avatar__img(src="../images/content/user.jpg")
+                    img.avatar__img(src="../images/content/nophoto.png")
                 .addreview__selectavatar
                   a.reset(href="#") Добавить фото
             .addreview__right
