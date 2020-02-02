@@ -23,4 +23,17 @@
         box-shadow: 5px 3px 20px 0 rgba(0,0,0,.07);
         margin-bottom: 20px;
     }
+
+
+    @include tablets{
+        &__item{
+            width: 48%;
+        }
+    }
+
+    @include phones{
+        &__item{
+            width: 100%;
+        }
+    }
 }
