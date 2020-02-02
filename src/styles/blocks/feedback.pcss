@@ -99,8 +99,24 @@
                 }
             }
         }
+        // Обрабатываются JS 
+        &--error{
+            .feedback__error{
+                display: block;
+            }
+        }
 
-        
+        &--focus{
+            &::after{
+                background-color: #ff9a00;
+            }
+        }
+     
+    }
+
+    &__error{
+        position: absolute;
+        display: none;
     }
 
     @include tablets(){
@@ -118,4 +134,6 @@
         }
     }
 }
+
+  
   

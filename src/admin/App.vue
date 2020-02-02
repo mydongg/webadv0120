@@ -38,10 +38,12 @@
           //- незаполненный итем
           .skills__item
             .skillblock
-              form.addlist
+              form.addlist#addlist
                 .addlist__header
                   .addlist__input
                     input.inputtext(type="text" placeholder="Название новой группы")
+                    .addlist__error
+                      .errorform Заполните поле
                   .confirm
                     button.confirm__button(href="#" type="submit")
                       svg(class="confirm__svg confirm__svg--yes" preserveAspectRatio="none")
@@ -54,8 +56,12 @@
                 form.addskill
                   .addskill__name
                     input.inputtext(type="text" placeholder="Новый навык")
+                    .addskill__error
+                      .errorform Заполните поле
                   .addskill__perc
                     input.inputtext(type="text" placeholder="%")
+                    .addskill__error
+                      .errorform Заполните поле
                   .addskill__submit
                     a.addb(href="#")
                       .plus
@@ -96,8 +102,12 @@
                 form.addskill
                   .addskill__name
                     input.inputtext(type="text" placeholder="Новый навык")
+                    .addskill__error
+                      .errorform Заполните поле
                   .addskill__perc
                     input.inputtext(type="text" placeholder="%")
+                    .addskill__error
+                      .errorform Заполните поле
                   .addskill__submit
                     a.addb(href="#")
                       .plus

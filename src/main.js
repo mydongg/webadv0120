@@ -12,3 +12,6 @@ import "./scripts/reviews";
 import "./scripts/sidemenu";
 import "./scripts/parallax";
 import "./scripts/scrolldown";
+
+// валидация
+import "./scripts/feedbackform";

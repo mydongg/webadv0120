@@ -62,8 +62,18 @@
     bottom: -7vh;
     left: 0;
     @include tablets{
-        
-    }
-    
-    
+        display: none;
+    } 
+}
+
+.smolarms{
+    width: 50%;
+    display: none;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+    margin-top: -50%;
+    margin-bottom: -20%;
+    @include tablets{
+        display: block;
+    } 
 }
