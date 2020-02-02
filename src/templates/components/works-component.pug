@@ -3,6 +3,7 @@ script(type="text/x-template")#works-container
         display(
             :works = "works",
             :currentWork = "currentWork",
+            :visibleWorks = "visibleWorks",
             @slide = "handleSlide"
         )   
         info(
@@ -16,7 +17,8 @@ script(type="text/x-template")#works-display
             img(:src="currentWork.photo" class="slider__displayPic")
             preview(
                 :works = "works",
-                :currentWork = "currentWork"
+                :currentWork = "currentWork",
+                :visibleWorks = "visibleWorks"
             )
             buttons(
                 @slide= "$emit('slide', $event)"
@@ -41,13 +43,13 @@ script(type="text/x-template")#works-info
 script(type="text/x-template")#works-previews
     .slider__slides
         ul.sl
-            li.sl__item(v-for="work in works" :class="{sl__item_current: work.id == currentWork.id}")
+            li.sl__item(v-for="work in visibleWorks" :class="{sl__item_current: work.id == currentWork.id}")
                 img(:src="work.photo" class="sl__img")
                 .sl__reactive
 
 script(type="text/x-template")#works-buttons
     .slider__arrows
-        .arrow.arrow--left.arrow--sq(@click="$emit('slide', 'prev')")
+        .arrow.arrow--left.arrow--sq(@click="$emit('slide', 'prev')", :disabled="true")
             +icon('arrow-down', 'arrow__svg')
         .arrow.arrow--right.arrow--sq(@click="$emit('slide', 'next')")
             +icon('arrow-down', 'arrow__svg')

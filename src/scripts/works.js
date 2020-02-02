@@ -3,7 +3,7 @@ import Vue from "vue";
 
 const preview = {
     template: "#works-previews",
-    props: ["works", "currentWork"]
+    props: ["works", "currentWork", "visibleWorks"]
 }
 
 const buttons = {
@@ -21,7 +21,7 @@ const display = {
     components: {
         preview, buttons
     },
-    props: ["works", "currentWork", "currentIndex"]
+    props: ["works", "currentWork", "visibleWorks", "currentIndex"]
 }
 
 const info = {
@@ -46,6 +46,8 @@ new Vue({
     data(){
         return {
             works: [],
+            visibleWorks: [],
+            firstVisibleItem: 0,
             currentIndex: 0
         }
     },
@@ -66,9 +68,15 @@ new Vue({
             switch(direction) {
                 case "next":
                     this.currentIndex++;
+                    if(this.currentIndex >= this.firstVisibleItem + 3){
+                        this.firstVisibleItem++;
+                    }
                     break;
                 case "prev":
                     this.currentIndex--;
+                    if(this.currentIndex < this.firstVisibleItem){
+                        this.firstVisibleItem--;
+                    }
                     break;
             }
         },
@@ -76,19 +84,33 @@ new Vue({
             const workAmount = this.works.length -1;
             if(value > workAmount){
                 this.currentIndex = 0;
+                this.firstVisibleItem = 0;
             }
             if(value < 0){
                 this.currentIndex = workAmount;
+                this.firstVisibleItem = workAmount - 2;
+            }
+        },
+        getVisibleWorks(value, first){
+            const workAmount = this.works.length -1;
+            if(workAmount <= 3){
+                this.visibleWorks = this.works; 
+            } else{
+                this.visibleWorks = this.works.slice(first, (first + 3));
             }
         }
     },
     watch: {
         currentIndex(value) {
             this.makeIndexLoop(value);
+        },
+        firstVisibleItem(value){
+            this.getVisibleWorks(this.works, value);
         }
     },
     created() {
         const data = require("../data/works.json")
         this.works = this.makeArrayImages(data);
+        this.getVisibleWorks(this.works, this.firstVisibleItem);
     }
 })
