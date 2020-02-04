@@ -265,7 +265,6 @@
 
 </template>
 
-
 <style lang="postcss">
 @import '../styles/admin.pcss';
 </style>
