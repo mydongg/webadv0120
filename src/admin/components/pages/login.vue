@@ -3,7 +3,9 @@
 .login
     .login__inner
         .login__form
-            form.auth
+            form.auth(
+                @submit.prevent="loginSubmit"
+            )
                 .auth__exit
                     svg(class="auth__exit-svg" preserveAspectRatio="none")
                                 use(xlink:href="sprite.svg#remove")
@@ -13,6 +15,7 @@
                     .auth__block-field
                         input.auth__block-input(
                             type="text"
+                            v-model="user.name"
                         )
                 .auth__block
                     .auth__block-title Пароль
@@ -20,15 +23,44 @@
                         .auth__block-icon
                         input.auth__block-input(
                             type="password"
+                            v-model="user.password"
                         )
                 .auth__submit
                     button.button Отправить
+                
+            
+    .error(v-if="errorMessage") {{errorMessage}}
 
 </template>
 
 <script>
+import $axios from '../../requests';
+import { mapState, mapActions, mapMutations } from 'vuex';
+
 export default {
-    
+    data: () => ({
+        user: {
+            name: '',
+            password: ''
+        }
+    }),
+    computed: {
+        ...mapState('user',{
+            errorMessage: state => state.errorMessage
+        })
+    },
+    methods: {
+        ...mapActions('user', ['login']),
+        ...mapMutations('user', ['setError']),
+        loginSubmit(){
+            if (!this.user.name || !this.user.password) {
+                this.setError("ПУСТА");
+            } else {
+                this.login(this.user);
+            }
+
+        }
+    }
 }
 </script>
 
@@ -69,8 +101,8 @@ export default {
     position: relative;
     &__exit{
         position: absolute;
-        right: 0;
-        top: 0;
+        right: -80px;
+        top: -60px;
         padding: 15px;
         margin: 15px;
         cursor: pointer;
@@ -145,6 +177,18 @@ export default {
         color: rgba(65, 76, 99, 0.302);
     }
 
+}
+
+.error{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    background-color: red;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000;
 }
 
 @media screen and (max-width: 480px) {
