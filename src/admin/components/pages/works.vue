@@ -85,3 +85,24 @@ section.works
                         svg(class="controlbutton__svg controlbutton__svg--remove" preserveAspectRatio="none")
                           use(xlink:href="sprite.svg#remove")    
 </template>
+
+
+<script>
+import PictureInput from 'vue-picture-input'
+
+export default {
+  components: {
+    PictureInput
+  },
+  methods: {
+    onChange(image){
+      
+    }
+  }
+}
+</script>
+
+
+<style lang="postcss" scoped>
+
+</style>

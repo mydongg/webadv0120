@@ -48,65 +48,36 @@
                       .plus
                         .plus__inner +
           //- готовый итем
-          .skills__item
-            .skillblock
-              form.addlist
-                .addlist__header
-                  .addlist__title Frontend
-                  .confirm
-                    button.confirm__button(href="#" type="submit")
-                      svg(class="confirm__svg " preserveAspectRatio="none")
-                        use(xlink:href="sprite.svg#pencil")
+          .skills__item(v-for="cat in categories" :key="cat.id")
+            skills-list(
+              :cat="cat"
+            )
 
-              .skillblock__body
-                ul.currentskills
-                  li.currentskills__item
-                    .currentskills__name Git
-                    .currentskills__perc 100
-                    .curentskills__control
-                      button.confirm__button(href="#")
-                        svg(class="confirm__svg" preserveAspectRatio="none")
-                          use(xlink:href="sprite.svg#trash")
-                      button.confirm__button(href="#")
-                        svg(class="confirm__svg" preserveAspectRatio="none")
-                          use(xlink:href="sprite.svg#pencil")
-                  li.currentskills__item
-                    .currentskills__name JavaScript
-                    .currentskills__perc 50
-                    .curentskills__control
-                      button.confirm__button(href="#")
-                        svg(class="confirm__svg" preserveAspectRatio="none")
-                          use(xlink:href="sprite.svg#trash")
-                      button.confirm__button(href="#")
-                        svg(class="confirm__svg" preserveAspectRatio="none")
-                          use(xlink:href="sprite.svg#pencil")
-                form.addskill
-                  .addskill__name
-                    input.inputtext(type="text" placeholder="Новый навык")
-                    .addskill__error
-                      .errorform Заполните поле
-                  .addskill__perc
-                    input.inputtext(type="text" placeholder="%")
-                    .addskill__error
-                      .errorform Заполните поле
-                  .addskill__submit
-                    a.addb(href="#")
-                      .plus
-                        .plus__inner +
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
     data: () => ({
         title: ''
     }),
+    components: {
+      skillsList: () => import('../skillsList')
+    },
+    computed: {
+      ...mapState("categories", {
+        categories: state => state.categories
+      })
+    },
+    created() {
+      this.fetchCategories();
+    },
     methods: {
-        ...mapActions("categories", ["addCategory"]),
+        ...mapActions("categories", ["addCategory", "fetchCategories" ]),
         addNewCategory(){
             this.addCategory(this.title)
         }
     }
-}
+} 
 </script>
