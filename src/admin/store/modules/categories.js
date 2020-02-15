@@ -92,7 +92,7 @@ export default{
                     commit('UPDATE_CATEGORY', category);
                 })
             } catch(error){
-
+                
             }
         }
     }

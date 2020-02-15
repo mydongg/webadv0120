@@ -39,24 +39,30 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
     data: () => ({
+        errorMessage: '',
         user: {
             name: '',
             password: ''
         }
     }),
-    computed: {
-        ...mapState('user',{
-            errorMessage: state => state.errorMessage
-        })
-    },
     methods: {
-        ...mapActions('user', ['login']),
-        ...mapMutations('user', ['setError']),
         loginSubmit(){
             if (!this.user.name || !this.user.password) {
-                this.setError("ПУСТА");
+                this.errorMessage = 'ПУСТО';
             } else {
-                this.login(this.user);
+                try{
+                    $axios.post("login", this.user).catch(error =>{
+                        this.errorMessage = error.response.data.error;
+                    }).then(response => {
+                        localStorage.setItem("token", response.data.token);
+                        this.$router.replace('/');
+                    });
+                }
+                catch(error){
+                    throw new Error(
+                        console.warn(error)
+                    )
+                }
             }
 
         }

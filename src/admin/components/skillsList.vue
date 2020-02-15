@@ -42,17 +42,19 @@
                     )  
                 form.addskill(
                     @submit.prevent="addInputSkill"
+                    :class={blocked: loading}
                 )
                   .addskill__name
                     input.inputtext(type="text" placeholder="Новый навык" v-model="skill.title")
                     .addskill__error
                       .errorform Заполните поле
                   .addskill__perc
-                    input.inputtext(type="text" placeholder="%" v-model="skill.percent")
+                    input.inputtext(type="text" maxlength="3" v-model="skill.percent")
                     .addskill__error
                       .errorform Заполните поле
                   button.addskill__submit(
                       type="submit"
+                      :disabled="loading" 
                   )
                     a.addb(href="#")
                       .plus
@@ -64,6 +66,7 @@ import { mapActions } from 'vuex';
 export default {
     data(){
         return {
+            loading: false,
             editmode: false,
             editedCategory: {...this.cat},
             skill: {
@@ -93,8 +96,17 @@ export default {
             this.updateCategory(this.editedCategory);
             this.chmode();
         },
-        addInputSkill(){
-            this.addSkill(this.skill);
+        async addInputSkill(){
+            this.loading = true;
+            try{
+              await this.addSkill(this.skill);
+              this.skill.title = "";
+              this.skill.percent = 0;
+            } catch(error){
+
+            } finally {
+              this.loading = false;
+            }      
         },
         chmode(){
           this.editmode = !this.editmode;

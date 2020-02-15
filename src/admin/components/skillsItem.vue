@@ -23,6 +23,7 @@
                     .currentskills__percInput
                         input.inputtext(
                             v-model="editedSkill.percent"
+                            maxlength="3"
                         )
                     .curentskills__control
                         .currentskills__control
@@ -67,8 +68,13 @@ export default {
             this.editmode = !this.editmode;
         },
         applyChange(){
-            this.updateSkill(this.editedSkill);
-            this.chmode();
+            try{
+                this.updateSkill(this.editedSkill);
+            } catch(error){
+                
+            } finally {
+                this.chmode();
+            }
         },
         discardChange(){
             this.editedSkill = {...this.sk};

@@ -40,7 +40,7 @@
                     .addskill__error
                       .errorform Заполните поле
                   .addskill__perc
-                    input.inputtext(type="text" placeholder="%")
+                    input.inputtext(type="text" maxlength="3") 
                     .addskill__error
                       .errorform Заполните поле
                   .addskill__submit

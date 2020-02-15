@@ -7,14 +7,12 @@ import categories from "./modules/categories";
 import works from "./modules/works";
 import skills from "./modules/skills";
 import skillsList from "./modules/skillsList";
-import user from "./modules/user";
 
 export default new Vuex.Store({
   modules: {
     categories,
     works,
     skills,
-    skillsList,
-    user
+    skillsList
   }
 });

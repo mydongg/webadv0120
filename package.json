@@ -51,6 +51,7 @@
   ],
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-polyfill": "^6.26.0",
     "normalize.css": "^8.0.1",
     "promptly": "^3.0.3",
     "pug": "^2.0.3",
