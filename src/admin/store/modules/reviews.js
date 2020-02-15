@@ -2,14 +2,18 @@ export default{
     namespaced: true,
     state: {
         reviews: [],
-        reviewAction: ""
+        reviewAction: "",
+        reviewItemToUpdate: {}
     },
     getters: {
 
     },
     mutations: {
         SET_ACTION: (state, action) => state.reviewAction = action,
-        SET_REVIEWS: (state, data) => state.reviews = data
+        SET_REVIEW_ITEM_TO_UPDATE: (state, item) => state.reviewItemToUpdate = item,
+        SET_REVIEWS: (state, data) => state.reviews = data,
+        ADD_REVIEW: (state, review) => state.reviews.push(review),
+        DELETE_REVIEW: (state, id) => state.reviews = state.reviews.filter(review => review.id != id)
     },
     actions: {
         fetchReviews({commit}){ 
@@ -18,7 +22,7 @@ export default{
                 console.log(response.data);
             })
         },
-        addReview(store, review){
+        addReview({commit}, review){
             const formData = new FormData();
             Object.keys(review).forEach(key => {
                 const value = review[key];
@@ -27,14 +31,14 @@ export default{
             this.$axios.post("/reviews", formData).catch(error => {
                 console.log(error);
             }).then(response => {
-                console.log(response);
+                commit('ADD_REVIEW', response.data);
             })
         },
-        deleteReview(store, id){
+        deleteReview({commit}, id){
             this.$axios.delete(`reviews/${id}`).catch(error => {
                 console.log(error)
             }).then(response => {
-                console.log(response);
+                commit('DELETE_REVIEW', id);
             })
         },
         updateReview(store, review){
@@ -53,6 +57,9 @@ export default{
         // update - изменение существующей
         setAction({commit}, action){
             commit('SET_ACTION', action);
+        },
+        setItemToUpdate({commit}, item){
+            commit('SET_REVIEW_ITEM_TO_UPDATE', item);
         }
     }
 }

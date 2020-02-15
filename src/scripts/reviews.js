@@ -1,5 +1,11 @@
 import Vue from 'vue';
+import axios from "axios";
 import Flickity from 'vue-flickity';
+import "babel-polyfill";
+
+const $axios = axios.create({
+    baseURL: "https://webdev-api.loftschool.com/"
+})
 
 const item = {
     template: "#reviews-item",
@@ -31,13 +37,6 @@ new Vue({
         }
     },
     methods: {
-        makeArrayImages(data){
-            return data.map(item => {
-                const requiredPic = require(`../images/content/avatars/${item.pic}`);
-                item.pic = requiredPic;
-                return item;
-            })
-        },
         next() {
             this.$refs.flickity.next();
           },
@@ -45,8 +44,12 @@ new Vue({
             this.$refs.flickity.previous();
         }
     },
-    created(){
-        const data = require("../data/reviews.json");
-        this.reviews =  this.makeArrayImages(data);
+    beforeCreate(){
+        // const {data} = await $axios.get('reviews/266');
+        // this.reviews = data;
+
+        $axios.get('reviews/266').then(response => {
+            this.reviews = response.data
+        })
     }
 })

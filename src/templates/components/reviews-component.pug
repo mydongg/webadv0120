@@ -19,7 +19,7 @@ script(type="text/x-template")#reviews-container
 
 script(type="text/x-template")#reviews-arrows
             .arrow__outer
-                  a.arrow.arrow--left.arrow--round(href="#" @click.prevent="$emit('previous', 'previous')" :disabled="1==1")
+                  a.arrow.arrow--left.arrow--round(href="#" @click.prevent="$emit('previous', 'previous')")
                     +icon('arrow-down', 'arrow__svg')
                   a.arrow.arrow--right.arrow--round(href="#" @click.prevent="$emit('next', 'next')")
                     +icon('arrow-down', 'arrow__svg')
@@ -33,8 +33,9 @@ script(type="text/x-template")#reviews-item
                       .rewievItem__body
                         .rewievItem__text {{item.text}}
                         .rewievItem__author
-                          .avatar.avatar--smol
-                            img(:src="item.pic" class="avatar__img")
+                          .avatar.avatar--smol(
+                            :style="{backgroundImage: `url(https://webdev-api.loftschool.com/${item.photo})`}"
+                          )
                           .rewievItem__authInfo
-                            .rewievItem__name {{item.name}}
+                            .rewievItem__name {{item.author}}
                             .rewievItem__position {{item.occ}} 

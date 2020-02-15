@@ -64,7 +64,8 @@ export default {
   },
   computed: {
       ...mapState("reviews", {
-          reviewAction: state => state.reviewAction
+          reviewAction: state => state.reviewAction,
+          reviewItemToUpdate: state => state.reviewItemToUpdate
       })
   },
   methods: {
@@ -91,8 +92,14 @@ export default {
         } else {
             this.updateReview(this.review);
         }
+        this.setAction("");
     }
-  }  
+  },
+  mounted() {
+    if(this.reviewAction === "update"){
+      this.review = this.reviewItemToUpdate;
+    }
+  } 
 }
 </script>
 

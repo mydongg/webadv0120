@@ -1,10 +1,9 @@
 <template lang="pug">
             .review
               .review__header
-                .avatar.avatar--smol
-                  img.avatar__img(
-                      v-bind:src="'https://webdev-api.loftschool.com/'+reviewItem.photo"
-                      )
+                .avatar.avatar--smol(
+                    :style="{backgroundImage: `url(https://webdev-api.loftschool.com/${reviewItem.photo})`}"
+                )
                 .review__author
                   .review__name {{reviewItem.author}}
                   .review__occ {{reviewItem.occ}}
@@ -42,13 +41,24 @@ export default {
         }
     },
     methods: {
-        ...mapActions('reviews', ['deleteReview', 'setAction']),
+        ...mapActions('reviews', ['deleteReview', 'setAction', 'setItemToUpdate']),
         deleteThisReview(){
             this.deleteReview(this.reviewItem.id);
         },
         updateThisReview(){
             this.setAction('update');
+            this.setItemToUpdate(this.reviewItem);
         }
     }
 }
 </script>
+
+
+<style lang="postcss" scoped>
+
+.avatar{
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+</style>>
