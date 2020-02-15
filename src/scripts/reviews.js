@@ -32,7 +32,8 @@ new Vue({
                 wrapAround: false,
                 groupCells: true,
                 selectedAttraction: 0.1,
-                friction: 0.5            
+                friction: 0.5,
+                cellAlign: 'right'          
               }
         }
     },
@@ -44,12 +45,14 @@ new Vue({
             this.$refs.flickity.previous();
         }
     },
-    beforeCreate(){
+    created(){
         // const {data} = await $axios.get('reviews/266');
         // this.reviews = data;
-
         $axios.get('reviews/266').then(response => {
             this.reviews = response.data
+            this.$nextTick(function() {
+                this.$refs.flickity.rerender()
+            })
         })
     }
 })
