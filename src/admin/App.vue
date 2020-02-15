@@ -11,7 +11,10 @@
             .header__username Станислав Савиных
           .header__name Панель управления
         .header__right
-          a.header__exit(href="#") Выйти
+          a.header__exit(
+            href="#"
+            @click.prevent="logoutUser"
+          ) Выйти
   //- гор.навигация
   .nav__outer
     .wrapper
@@ -31,6 +34,7 @@
 import skillsPage from './components/pages/skills';
 import worksPage from './components/pages/works';
 import reviewsPage from './components/pages/reviews';
+import { mapActions } from 'vuex';
 
 export default {
   data(){
@@ -49,16 +53,23 @@ export default {
           path: '/reviews'
         }
       ],
-      currentPage: '/'
+      currentPage: this.$router.currentRoute.path
     }
   },
   components: {
     skillsPage, worksPage, reviewsPage
   },
   methods: {
+    ...mapActions("user", ['logout']),
     selectActivePage(path){
-      this.$router.push(path);
-      this.currentPage = path;
+      if(this.currentPage != path){
+        this.$router.push(path);
+        this.currentPage = path;
+      }
+    },
+    logoutUser(){
+      this.logout();
+      this.$router.replace("/login")
     }
   }
 }

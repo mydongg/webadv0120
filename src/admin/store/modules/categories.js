@@ -5,7 +5,9 @@ export default{
     },
     mutations: {
         SET_CATEGORIES: (state, data) => state.categories = data,
-        ADD_CATEGORY: (state, category) => state.categories.push(category),
+        // ниже unshift в данном случае используется т.к. на сервере
+        // добавление происходит в начало массива а не в конец
+        ADD_CATEGORY: (state, category) => state.categories.unshift(category),
         DELETE_CATEGORY: (state, id) => state.categories = state.categories.filter(cat => cat.id !=id),
         UPDATE_CATEGORY: (state, newCategory) => {
             state.categories = state.categories.map(category => {

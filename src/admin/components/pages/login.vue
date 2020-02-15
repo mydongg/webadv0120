@@ -6,7 +6,9 @@
             form.auth(
                 @submit.prevent="loginSubmit"
             )
-                .auth__exit
+                a.auth__exit(
+                    href="/"
+                )
                     svg(class="auth__exit-svg" preserveAspectRatio="none")
                                 use(xlink:href="sprite.svg#remove")
                 h2.auth__title Авторизация

@@ -4,15 +4,23 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import categories from "./modules/categories";
-import works from "./modules/works";
 import skills from "./modules/skills";
 import skillsList from "./modules/skillsList";
+
+
+import works from "./modules/works";
+
+import reviews from "./modules/reviews";
+
+import user from "./modules/user";
 
 export default new Vuex.Store({
   modules: {
     categories,
-    works,
     skills,
-    skillsList
+    skillsList,
+    works,
+    reviews,
+    user
   }
 });
