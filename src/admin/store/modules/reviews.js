@@ -19,7 +19,6 @@ export default{
         fetchReviews({commit}){ 
             this.$axios.get("reviews/266").catch(error => console.log(error)).then(response => {
                 commit('SET_REVIEWS', response.data)
-                console.log(response.data);
             })
         },
         addReview({commit}, review){
@@ -42,6 +41,7 @@ export default{
             })
         },
         updateReview(store, review){
+            console.log(review);
             this.$axios.post(`reviews/${review.id}`, review).catch(error => {
                 console.log(error)
             }).then(response => {
@@ -60,6 +60,7 @@ export default{
         },
         setItemToUpdate({commit}, item){
             commit('SET_REVIEW_ITEM_TO_UPDATE', item);
+            console.log(item);
         }
     }
 }

@@ -15,10 +15,15 @@
                       :class="{filled: renderedPhoto.length}"
                       )
                 .addreview__selectavatar
-                  input.reset(
+                  input.reset--hidden(
+                    name="inputFileAvatar"
+                    id="inputFileAvatar"
                     type="file"
                     @change="handleFile"
-                  ) 
+                  )
+                  label.reset.reset--download(
+                    for="inputFileAvatar"
+                  ) Добавить фото
             .addreview__right
               .addreview__about
                 .addreview__field
@@ -90,7 +95,7 @@ export default {
         if(this.reviewAction === "add"){
             this.addReview(this.review);
         } else {
-            this.updateReview(this.review);
+            this.updateReview(this.review); 
         }
         this.setAction("");
     }
@@ -98,6 +103,8 @@ export default {
   mounted() {
     if(this.reviewAction === "update"){
       this.review = this.reviewItemToUpdate;
+      this.renderedPhoto = "https://webdev-api.loftschool.com/"+ this.reviewItemToUpdate.photo;
+      
     }
   } 
 }
@@ -113,5 +120,14 @@ export default {
 
 .filled{
   display: none;
+}
+
+.reset--download{
+  cursor: pointer; 
+}
+
+.reset--hidden{
+  visibility: hidden;
+  position: absolute;
 }
 </style>

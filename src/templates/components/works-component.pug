@@ -1,5 +1,8 @@
 script(type="text/x-template")#works-container
     .slider
+        pre(
+            style="color: #000"
+        ) {{currentWork}}   
         display(
             :works = "works",
             :currentWork = "currentWork",
@@ -12,9 +15,11 @@ script(type="text/x-template")#works-container
 
 script(type="text/x-template")#works-display
     .slider__left
+        pre(
+            style="color: #000"
+        ) {{currentWork}}   
         .slider__display
-            //- +image("content/previews/1.jpg","slider__displayPic")
-            img(:src="currentWork.photo" class="slider__displayPic")
+            img(:src=`https://webdev-api.loftschool.com/` class="slider__displayPic")
             preview(
                 :works = "works",
                 :currentWork = "currentWork",
@@ -27,6 +32,9 @@ script(type="text/x-template")#works-display
 
 script(type="text/x-template")#works-info
     .slider__right
+        pre(
+            style="color: #000"
+        ) {{currentWork}}
         .slider__tags
             tags(
                 :tagsArray = "tagsArray"

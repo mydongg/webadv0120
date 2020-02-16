@@ -44,7 +44,7 @@ new Vue({
     },
     created(){
         $axios.get("categories/266").then(response => {
-            this.skills = response.data; 
+            this.skills = response.data;    
         })  
-    }
+    }   
 })

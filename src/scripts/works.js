@@ -1,5 +1,9 @@
 import Vue from "vue";
+import axios from "axios";
 
+const $axios = axios.create({
+    baseURL: "https://webdev-api.loftschool.com/"
+})
 
 const preview = {
     template: "#works-previews",
@@ -32,7 +36,7 @@ const info = {
     props: ["currentWork"],
     computed: {
         tagsArray(){
-            return this.currentWork.skills.split(', ');
+            return this.currentWork.skills.split(',');
         }
     }
 }
@@ -45,7 +49,7 @@ new Vue({
     },
     data(){
         return {
-            works: [],
+            works: {},
             visibleWorks: [],
             firstVisibleItem: 0,
             currentIndex: 0
@@ -57,13 +61,6 @@ new Vue({
         }
     },
     methods: {
-        makeArrayImages(data){
-            return data.map(item => {
-                const requiredPic = require(`../images/content/previews/${item.photo}`);
-                item.photo = requiredPic;
-                return item;
-            })
-        },
         handleSlide(direction){
             switch(direction) {
                 case "next":
@@ -108,9 +105,12 @@ new Vue({
             this.getVisibleWorks(this.works, value);
         }
     },
-    created() {
-        const data = require("../data/works.json")
-        this.works = this.makeArrayImages(data);
-        this.getVisibleWorks(this.works, this.firstVisibleItem);
+    created() {       
+        $axios.get('works/266').then(response => {
+            this.works = response.data;
+            this.getVisibleWorks(this.works, this.firstVisibleItem);
+            console.log(this);
+            this.$children
+        })
     }
 })
