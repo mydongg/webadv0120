@@ -18,7 +18,10 @@
                         input.auth__block-input(
                             type="text"
                             v-model="user.name"
+                            @click="releaseError"
                         )
+                        .auth__block-error
+                            .errorInput Заполните поле
                 .auth__block
                     .auth__block-title Пароль
                     .auth__block-field
@@ -26,7 +29,10 @@
                         input.auth__block-input(
                             type="password"
                             v-model="user.password"
+                            @click="releaseError"
                         )
+                        .auth__block-error
+                            .errorInput Заполните поле
                 .auth__submit
                     button.button Отправить
                 
@@ -37,7 +43,7 @@
 
 <script>
 import $axios from '../../requests';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
     data: () => ({
@@ -48,9 +54,15 @@ export default {
         }
     }),
     methods: {
-        loginSubmit(){
+        loginSubmit(e){
             if (!this.user.name || !this.user.password) {
-                this.errorMessage = 'ПУСТО';
+                const formElems =  e.target.elements;
+                for (let index = 0; index < formElems.length; index++) {
+                    let currentItem = formElems[index];
+                    if(currentItem.tagName == 'INPUT' && currentItem.value==""){
+                        currentItem.classList.add('input--error');
+                    }
+                }
             } else {
                 try{
                     $axios.post("login", this.user).catch(error =>{
@@ -66,7 +78,9 @@ export default {
                     )
                 }
             }
-
+        },
+        releaseError(e){
+            e.target.classList.remove('input--error');
         }
     }
 }
@@ -185,6 +199,22 @@ export default {
         color: rgba(65, 76, 99, 0.302);
     }
 
+    &__block-error{
+        display: none;
+        position: absolute;
+        left:50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        color: #fff;
+    }
+
+    /* триггер отображения ошибки */
+}
+
+.input--error{
+    +.auth__block-error{
+        display: block;
+    }
 }
 
 .error{
@@ -193,11 +223,30 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     padding: 15px;
-    background-color: red;
+    background-color: #cd1515;
     text-transform: uppercase;
     font-weight: 700;
-    color: #000;
 }
+
+.errorInput{
+    font-size: 14px;
+    padding: 10px;
+    background-color: #cd1515;
+    pointer-events: none;
+    z-index: 10;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -70%;
+        transform: translateX(-50%);
+        border: 15px solid transparent;
+        border-bottom: 15px solid #cd1515;
+        pointer-events: none;
+    }
+}
+
+
 
 @media screen and (max-width: 480px) {
     .login__form{
