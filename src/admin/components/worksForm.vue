@@ -7,10 +7,14 @@
             .addwork__body
               .addwork__left
                 .selectimage(
-                    @drop="handleFile"
+                    v-cloak
+                    @drop.prevent="handleDroppedFile"
+                    @dragover.prevent
                     :style="{backgroundImage: `url(${renderedPhoto})`}"
                 )
-                  .selectimage__content
+                  .selectimage__content(
+                      v-if="!renderedPhoto"
+                  )
                     .selectimage__text Перетащите или загрузите для загрузки изображения
                     .selectimage__button
                       input(
@@ -22,6 +26,20 @@
                       label(
                           for="inputWorkPreview"
                       ).submit Загрузить
+                  .selectimage__content(
+                      v-else
+                  )
+                    .selectimage__text.selectimage__text--white Перетащите или загрузите для изменения изображения
+                    .selectimage__button
+                      input(
+                          type="file"
+                          @change="handleFile"
+                          name="inputWorkPreview"
+                          id="inputWorkPreview"
+                      ).submit--hidden
+                      label(
+                          for="inputWorkPreview"
+                      ).submit Изменить
               .addwork__right
                 .addwork__field
                   label.addwork__fieldtitle Название
@@ -93,6 +111,11 @@ export default {
             this.work.photo = file;
             this.renderImageFile(file);
         },
+        handleDroppedFile(event){
+            const file = event.dataTransfer.files[0];
+            this.work.photo = file;
+            this.renderImageFile(file);
+        },
         renderImageFile(file){
             const reader = new FileReader();
             try {
@@ -129,6 +152,14 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    transition: background-color .3s;
+    &:hover{
+        background-color: rgba(65,76,99,.502);
+    }
+}
+
+.selectimage__text--white{
+    color: #fff;
 }
 
 .submit{
