@@ -53,7 +53,8 @@ export default {
           path: '/reviews'
         }
       ],
-      currentPage: this.$router.currentRoute.path
+      // костыль 80 уровня, так и не понял как правильно отловить this.$route.path
+      currentPage: window.location.hash.slice(1)
     }
   },
   components: {
