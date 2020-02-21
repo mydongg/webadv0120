@@ -25,7 +25,7 @@ const display = {
     components: {
         preview, buttons
     },
-    props: ["works", "currentWork", "visibleWorks", "currentIndex"]
+    props: ["works", "currentWork", "visibleWorks", "currentIndex"],
 }
 
 const info = {
@@ -36,7 +36,7 @@ const info = {
     props: ["currentWork"],
     computed: {
         tagsArray(){
-            return this.currentWork.skills.split(',');
+            return this.currentWork.techs.split(',');
         }
     }
 }
@@ -94,7 +94,7 @@ new Vue({
                 this.visibleWorks = this.works; 
             } else{
                 this.visibleWorks = this.works.slice(first, (first + 3));
-            }
+            }   
         }
     },
     watch: {
@@ -109,8 +109,6 @@ new Vue({
         $axios.get('works/266').then(response => {
             this.works = response.data;
             this.getVisibleWorks(this.works, this.firstVisibleItem);
-            console.log(this);
-            this.$children
         })
     }
 })

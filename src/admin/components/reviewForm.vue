@@ -104,7 +104,6 @@ export default {
     if(this.reviewAction === "update"){
       this.review = this.reviewItemToUpdate;
       this.renderedPhoto = "https://webdev-api.loftschool.com/"+ this.reviewItemToUpdate.photo;
-      
     }
   } 
 }

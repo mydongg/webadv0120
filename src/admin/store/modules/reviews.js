@@ -13,7 +13,15 @@ export default{
         SET_REVIEW_ITEM_TO_UPDATE: (state, item) => state.reviewItemToUpdate = item,
         SET_REVIEWS: (state, data) => state.reviews = data,
         ADD_REVIEW: (state, review) => state.reviews.push(review),
-        DELETE_REVIEW: (state, id) => state.reviews = state.reviews.filter(review => review.id != id)
+        DELETE_REVIEW: (state, id) => state.reviews = state.reviews.filter(review => review.id != id),
+        UPDATE_REVIEW: (state, review) => {
+            state.reviews = state.reviews.map(item => {
+                if(item.id === review.id){
+                    item = review;
+                }
+                return item;
+            })
+        }
     },
     actions: {
         fetchReviews({commit}){ 
@@ -40,17 +48,16 @@ export default{
                 commit('DELETE_REVIEW', id);
             })
         },
-        updateReview(store, review){
+        updateReview({commit}, review){
             console.log(review);
             this.$axios.post(`reviews/${review.id}`, review).catch(error => {
                 console.log(error)
             }).then(response => {
-                console.log(response);
+                commit('UPDATE_REVIEW', response.data);
             })
         },
         
-        // Actions
-
+        // Action
         // Устанавливает действие для формы
         // пустая строка - форма не отображается
         // add - добавление новой формы

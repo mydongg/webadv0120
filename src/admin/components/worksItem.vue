@@ -8,7 +8,6 @@
                       v-for="tag in work.techs.split(',')"
                     )
                       .tag__name {{tag}}
-
                 .work__bottom
                   .work__title {{work.title}}
                   .work__desc {{work.description}}

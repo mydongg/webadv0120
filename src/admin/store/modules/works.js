@@ -19,6 +19,7 @@ export default {
                 console.log(error);
             }).then(response => {
                 commit("SET_WORKS", response.data)
+                console.log(response.data)
             })
         },
         addWork({commit}, work){
@@ -30,7 +31,7 @@ export default {
             this.$axios.post('works', formData).catch(error => {
                 console.log(error);
             }).then(response => {
-                console.log(response);
+                console.log(response.data);
                 commit("ADD_WORKS", response.data);
             })
         },
@@ -38,7 +39,6 @@ export default {
             this.$axios.delete(`works/${id}`).catch(error => {
                 console.log(error);
             }).then(response => {
-                console.log(response);
                 commit("DELETE_WORK", id);
             })
         },

@@ -46,8 +46,6 @@ new Vue({
         }
     },
     created(){
-        // const {data} = await $axios.get('reviews/266');
-        // this.reviews = data;
         $axios.get('reviews/266').then(response => {
             this.reviews = response.data
             this.$nextTick(function() {

@@ -1,25 +1,22 @@
 script(type="text/x-template")#works-container
     .slider
-        pre(
-            style="color: #000"
-        ) {{currentWork}}   
         display(
+            v-if="currentWork"
             :works = "works",
             :currentWork = "currentWork",
             :visibleWorks = "visibleWorks",
+            :currentIndex = "currentIndex"
             @slide = "handleSlide"
         )   
         info(
+            v-if="currentWork"
             :currentWork = "currentWork"
         )
 
 script(type="text/x-template")#works-display
     .slider__left
-        pre(
-            style="color: #000"
-        ) {{currentWork}}   
         .slider__display
-            img(:src=`https://webdev-api.loftschool.com/` class="slider__displayPic")
+            img(:src="`https://webdev-api.loftschool.com/${currentWork.photo}`" class="slider__displayPic")
             preview(
                 :works = "works",
                 :currentWork = "currentWork",
@@ -28,13 +25,10 @@ script(type="text/x-template")#works-display
             buttons(
                 @slide= "$emit('slide', $event)"
             )
-            .slider__number {{currentWork.id}}
+            .slider__number {{currentIndex+1}}
 
 script(type="text/x-template")#works-info
     .slider__right
-        pre(
-            style="color: #000"
-        ) {{currentWork}}
         .slider__tags
             tags(
                 :tagsArray = "tagsArray"
@@ -52,7 +46,7 @@ script(type="text/x-template")#works-previews
     .slider__slides
         ul.sl
             li.sl__item(v-for="work in visibleWorks" :class="{sl__item_current: work.id == currentWork.id}")
-                img(:src="work.photo" class="sl__img")
+                img(:src="`https://webdev-api.loftschool.com/${work.photo}`" class="sl__img")
                 .sl__reactive
 
 script(type="text/x-template")#works-buttons
