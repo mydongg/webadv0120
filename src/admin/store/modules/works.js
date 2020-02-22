@@ -42,6 +42,9 @@ export default {
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit("ADD_WORKS", response.data);
+                if(response.status === 201){
+                    this.dispatch("errors/setUpdate", "Работа добавлена");
+                }
             })
         },
         deleteWork({commit}, id){
@@ -49,6 +52,10 @@ export default {
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit("DELETE_WORK", id);
+                console.log(response);
+                if(response.status === 200){
+                    this.dispatch("errors/setUpdate", "Работа удалена");
+                }
             })
         },
         updateWork({commit}, work){
@@ -60,7 +67,11 @@ export default {
             this.$axios.post(`works/${work.id}`, formData).catch(error => {
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
-                commit('UPDATE_WORK', response.data.work)
+                commit('UPDATE_WORK', response.data.work);
+                console.log(response);
+                if(response.status === 200){
+                    this.dispatch("errors/setUpdate", "Работа изменена");
+                }
             })
         },
         // Actions

@@ -92,8 +92,13 @@ export default {
     methods: {
         ...mapActions('categories', ['deleteCategory', 'updateCategory']),
         ...mapActions('skillsList', ['addSkill']),
+        ...mapActions('errors', ['setUpdate']),
         deleteExistedCategory(id){
+          if(confirm('Удалить категорию?')){
             this.deleteCategory(id);
+          } else {
+            this.setUpdate('Действие отменено');
+          }
         },
         updateExistedCategory(e){
             if(!this.editedCategory.category){

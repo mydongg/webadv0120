@@ -50,7 +50,6 @@ export default{
     actions: {
         addCategory({commit}, title){
             try{
-                console.log({title});
                 this.$axios.post("categories", {title}).then(response => {
                     // в респонс добавляется пустой объект скиллов, иначе
                     // сразу после создания категории в нее нельзя добавить скиллы, т.к.
@@ -60,9 +59,7 @@ export default{
                     commit('ADD_CATEGORY', newCategory); 
                 })
             } catch(error){
-                throw new Error(
-                    error.response.data.error || error.response.data.message
-                )
+                this.dispatch("errors/setError", error.message);
             }
         },
         fetchCategories({ commit }){
@@ -70,19 +67,20 @@ export default{
                 this.$axios.get("categories/266").then(response => {
                     commit('SET_CATEGORIES', response.data);
                 });
-                
-
             } catch(error){
-
+                this.dispatch("errors/setError", error.message);
             }
         },
         deleteCategory({commit}, id){
             try{
                 this.$axios.delete(`categories/${id}`).then(response => {
                     commit('DELETE_CATEGORY', id);
+                    if(response.status === 200){
+                        this.dispatch("errors/setUpdate", "Категория удалена");
+                    }
                 })
             } catch(error){
-
+                this.dispatch("errors/setError", error.message);
             }
         },
         updateCategory({commit}, category){
@@ -92,9 +90,12 @@ export default{
                 }
                 this.$axios.post(`categories/${category.id}`, newTitle).then(response => {
                     commit('UPDATE_CATEGORY', category);
+                    if(response.status === 200){
+                        this.dispatch("errors/setUpdate", "Категория удалена");
+                    }
                 })
             } catch(error){
-                
+                this.dispatch("errors/setError", error.message);
             }
         }
     }

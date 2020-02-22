@@ -30,7 +30,7 @@
             a.nav__link(@click='selectActivePage(page.path)') {{page.name}}
   router-view
   .error(v-if="errorMessage") {{errorMessage}}
-  
+  .update(v-if="updateMessage") {{updateMessage}}
 </template>
 
 
@@ -66,7 +66,8 @@ export default {
   },
   computed: {
     ...mapState('errors', {
-      errorMessage: state => state.error
+      errorMessage: state => state.error,
+      updateMessage: state => state.update
     })
   },
   methods: {
@@ -102,6 +103,17 @@ export default {
     background-color: #cd1515;
     text-transform: uppercase;
     font-weight: 700;
+}
+
+.update{
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  background-color: rgb(75,177,50);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 

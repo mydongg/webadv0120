@@ -42,10 +42,16 @@ export default {
     },
     methods: {
         ...mapActions('reviews', ['deleteReview', 'setAction', 'setItemToUpdate']),
+        ...mapActions('errors', ['setUpdate']),
         deleteThisReview(){
-            this.deleteReview(this.reviewItem.id);
+            if(confirm('Удалить отзыв?')){
+                this.deleteReview(this.reviewItem.id);
+            } else {
+                this.setUpdate('Действие отменено');
+            }
         },
-        updateThisReview(){
+        async updateThisReview(){
+            await this.setAction('');
             this.setAction('update');
             let itemToUpdate = Object.assign({}, this.reviewItem);
             this.setItemToUpdate(itemToUpdate);

@@ -69,8 +69,13 @@ export default {
     },
     methods: {
         ...mapActions('skillsList', ['updateSkill','deleteSkill']),
+        ...mapActions('errors', ['setUpdate']),
         deleteCurrentSkill(skill){
-            this.deleteSkill(skill);
+            if(confirm('Удалить скилл?')){
+                this.deleteSkill(skill);
+            } else {
+                this.setUpdate('Действие отменено');
+            }
         },
         chmode(){
             this.editmode = !this.editmode;

@@ -42,6 +42,9 @@ export default{
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit('ADD_REVIEW', response.data);
+                if(response.status === 201){
+                    this.dispatch("errors/setUpdate", "Отзыв добавлен");
+                }
             })
         },
         deleteReview({commit}, id){
@@ -49,6 +52,9 @@ export default{
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit('DELETE_REVIEW', id);
+                if(response.status === 200){
+                    this.dispatch("errors/setUpdate", "Отзыв удален");
+                }
             })
         },
         updateReview({commit}, review){
@@ -61,6 +67,9 @@ export default{
                 this.dispatch("errors/setError", error);
             }).then(response => {
                 commit('UPDATE_REVIEW', response.data.review);
+                if(response.status === 200){
+                    this.dispatch("errors/setUpdate", "Отзыв изменен");
+                }
             })
         },
         // Action

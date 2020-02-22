@@ -48,10 +48,16 @@ export default {
     },
     methods: {
         ...mapActions('works', ['deleteWork', 'setAction', 'setItemToUpdate']),
+        ...mapActions('errors', ['setUpdate']),
         deleteThisWork(){
-          this.deleteWork(this.work.id);
+          if(confirm('Удалить работу?')){
+            this.deleteWork(this.work.id);
+          } else {
+            this.setUpdate('Действие отменено');
+          }
         },
-        updateThisWork(){
+        async updateThisWork(){
+          await this.setAction('');
           this.setAction('update');
           let itemToUpdate = Object.assign({}, this.work);
           itemToUpdate.techs = itemToUpdate.techs.split(',');

@@ -11,7 +11,7 @@ section.reviews
         ul.reviews__list
           .reviews__item
             .plusblock(
-              @click="setAction('add')"
+              @click="changeFormItem"
             )
               .plusblock__plus +
               .plusblock__round
@@ -27,6 +27,8 @@ section.reviews
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import "babel-polyfill";
+
 export default {
   data() {
     return {
@@ -45,6 +47,10 @@ export default {
   },
   methods: {
     ...mapActions('reviews', ['fetchReviews', 'setAction']),
+    async changeFormItem(){
+      await this.setAction('');
+      this.setAction('add');
+    }
   },
   created() {
     this.fetchReviews();

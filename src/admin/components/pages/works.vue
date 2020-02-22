@@ -11,7 +11,7 @@ section.works
           ul.works__list
             .works__item
               .plusblock(
-                @click="setActionAdd"
+                @click="changeFormItem"
               )
                 .plusblock__plus +
                 .plusblock__round
@@ -27,6 +27,7 @@ section.works
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import "babel-polyfill";
 
 export default {
   components: {
@@ -42,7 +43,8 @@ export default {
   },
   methods: {
     ...mapActions('works', ['fetchWorks', 'setAction']),
-    setActionAdd(){
+    async changeFormItem(){
+      await this.setAction('');
       this.setAction('add');
     }
   },
