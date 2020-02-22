@@ -14,6 +14,8 @@ import reviews from "./modules/reviews";
 
 import user from "./modules/user";
 
+import errors from "./modules/errors"
+
 export default new Vuex.Store({
   modules: {
     categories,
@@ -21,6 +23,7 @@ export default new Vuex.Store({
     skillsList,
     works,
     reviews,
-    user
+    user,
+    errors
   }
 });

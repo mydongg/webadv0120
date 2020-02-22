@@ -47,7 +47,8 @@ export default {
         },
         updateThisReview(){
             this.setAction('update');
-            this.setItemToUpdate(this.reviewItem);
+            let itemToUpdate = Object.assign({}, this.reviewItem);
+            this.setItemToUpdate(itemToUpdate);
         }
     }
 }

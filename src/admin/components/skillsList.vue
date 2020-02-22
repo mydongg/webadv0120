@@ -20,7 +20,10 @@
                   .addlist__input
                     input.inputtext(
                       v-model="editedCategory.category"
+                      @click="releaseError"
                     )
+                    .input__error
+                      .errorInput Заполните поле
                   .confirm
                     button.confirm__button(
                     )
@@ -45,12 +48,12 @@
                     :class={blocked: loading}
                 )
                   .addskill__name
-                    input.inputtext(type="text" placeholder="Новый навык" v-model="skill.title")
-                    .addskill__error
+                    input.inputtext(type="text" placeholder="Новый навык" v-model="skill.title" @click="releaseError")
+                    .input__error
                       .errorform Заполните поле
                   .addskill__perc
-                    input.inputtext(type="text" maxlength="3" v-model="skill.percent")
-                    .addskill__error
+                    input.inputtext(type="text" maxlength="3" v-model="skill.percent" @click="releaseError")
+                    .input__error
                       .errorform Заполните поле
                   button.addskill__submit(
                       type="submit"
@@ -92,24 +95,48 @@ export default {
         deleteExistedCategory(id){
             this.deleteCategory(id);
         },
-        updateExistedCategory(){
-            this.updateCategory(this.editedCategory);
-            this.chmode();
-        },
-        async addInputSkill(){
-            this.loading = true;
-            try{
-              await this.addSkill(this.skill);
-              this.skill.title = "";
-              this.skill.percent = 0;
-            } catch(error){
+        updateExistedCategory(e){
+            if(!this.editedCategory.category){
+              const formElems = e.target.elements;
+              for (let index = 0; index < formElems.length; index++) {
+                let currentItem = formElems[index];
+                    if(currentItem.tagName == 'INPUT' && currentItem.value==""){
+                        currentItem.classList.add('input--error');
+                }
+              }
+            } else {
+              this.updateCategory(this.editedCategory);
+              this.chmode();
+            }
 
-            } finally {
-              this.loading = false;
-            }      
+        },
+        async addInputSkill(e){
+            this.loading = true;
+            if(!this.skill.title || !this.skill.name){
+              const formElems = e.target.elements;
+              for (let index = 0; index < formElems.length; index++) {
+                let currentItem = formElems[index];
+                    if(currentItem.tagName == 'INPUT' && currentItem.value==""){
+                        currentItem.classList.add('input--error');
+                }
+              }
+            } else {
+              try{
+                await this.addSkill(this.skill);
+                this.skill.title = "";
+                this.skill.percent = 0;
+              } catch(error){
+
+              } finally {
+                this.loading = false;
+              }      
+            }   
         },
         chmode(){
           this.editmode = !this.editmode;
+        },
+        releaseError(e){
+            e.target.classList.remove('input--error');
         }
     }
 }
@@ -118,5 +145,36 @@ export default {
 
 
 <style lang="postcss" scoped>
+
+.input__error{
+  position: absolute;
+  display: none;
+}
+
+.input--error{
+    +.input__error{
+        display: block;
+    }
+}
+
+
+
+.errorInput{
+    font-size: 14px;
+    padding: 10px;
+    background-color: #cd1515;
+    pointer-events: none;
+    z-index: 10;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -70%;
+        transform: translateX(-50%);
+        border: 15px solid transparent;
+        border-bottom: 15px solid #cd1515;
+        pointer-events: none;
+    }
+}
 
 </style>

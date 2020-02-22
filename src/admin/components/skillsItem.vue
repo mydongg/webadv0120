@@ -15,25 +15,33 @@
                                 svg(class="confirm__svg" preserveAspectRatio="none")
                                     use(xlink:href="sprite.svg#pencil")
 
-    .currentskills__itemInner(v-else)
+    form.currentskills__itemInner(
+        v-else
+        @submit.prevent="applyChange"
+        )
                     .currentskills__nameInput
                         input.inputtext(
                             v-model="editedSkill.title"
+                            @click="releaseError"
                         )
+                        .input__error
+                            .errorInput Заполните поле
                     .currentskills__percInput
                         input.inputtext(
                             v-model="editedSkill.percent"
                             maxlength="3"
+                            @click="releaseError"
                         )
+                        .input__error
+                            .errorInput Заполните поле
                     .curentskills__control
                         .currentskills__control
                             button.confirm__button(
-                                @click="applyChange"
                             )
                                 svg(class="confirm__svg confirm__svg--yes" preserveAspectRatio="none")
                                     use(xlink:href="sprite.svg#tick")
                             button.confirm__button(
-                                @click="discardChange"
+                                @click.prevent="discardChange"
                             )
                                 svg(class="confirm__svg confirm__svg--no" preserveAspectRatio="none")
                                     use(xlink:href="sprite.svg#remove") 
@@ -67,18 +75,32 @@ export default {
         chmode(){
             this.editmode = !this.editmode;
         },
-        applyChange(){
-            try{
-                this.updateSkill(this.editedSkill);
-            } catch(error){
-                
-            } finally {
-                this.chmode();
+        applyChange(e){
+            if(!this.editedSkill.title || !this.editedSkill.percent){
+                const formElems = e.target.elements;
+                for (let index = 0; index < formElems.length; index++) {
+                    let currentItem = formElems[index];
+                    if(currentItem.tagName == 'INPUT' && (!currentItem.value)){
+                        currentItem.classList.add('input--error');
+                    }
+                }
+            } else {
+                try{
+                    this.updateSkill(this.editedSkill);
+                } catch(error){
+                    
+                } finally {
+                    this.chmode();
+                }
             }
+
         },
         discardChange(){
             this.editedSkill = {...this.sk};
             this.chmode();
+        },
+        releaseError(e){
+            e.target.classList.remove('input--error');
         }
     }
 }
@@ -87,5 +109,44 @@ export default {
 
 
 <style lang="postcss" scoped>
+
+.currentskills__nameInput{
+    position: relative;
+}
+
+.input__error{
+  position: absolute;
+  display: none;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.input--error{
+    +.input__error{
+        display: block;
+    }
+}
+
+
+
+.errorInput{
+    font-size: 14px;
+    padding: 10px;
+    background-color: #cd1515;
+    pointer-events: none;
+    z-index: 10;
+    color: #fff;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -70%;
+        transform: translateX(-50%);
+        border: 15px solid transparent;
+        border-bottom: 15px solid #cd1515;
+        pointer-events: none;
+    }
+}
 
 </style>

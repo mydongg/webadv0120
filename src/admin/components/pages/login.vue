@@ -35,25 +35,28 @@
                             .errorInput Заполните поле
                 .auth__submit
                     button.button Отправить
-                
-            
     .error(v-if="errorMessage") {{errorMessage}}
 
 </template>
 
 <script>
 import $axios from '../../requests';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
     data: () => ({
-        errorMessage: '',
         user: {
             name: '',
             password: ''
         }
     }),
+    computed: {
+        ...mapState('errors', {
+            errorMessage: state => state.error
+        })
+    },
     methods: {
+        ...mapActions('errors', ['setError']),
         loginSubmit(e){
             if (!this.user.name || !this.user.password) {
                 const formElems =  e.target.elements;
@@ -66,10 +69,11 @@ export default {
             } else {
                 try{
                     $axios.post("login", this.user).catch(error =>{
-                        this.errorMessage = error.response.data.error;
+                        this.setError(error.response.data.error);
                     }).then(response => {
                         localStorage.setItem("token", response.data.token);
                         this.$router.replace('/');
+                        this.setError('');
                     });
                 }
                 catch(error){

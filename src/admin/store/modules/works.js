@@ -16,10 +16,9 @@ export default {
     actions: {
         fetchWorks({commit}){
             this.$axios.get('works/266').catch(error =>{
-                console.log(error);
+                this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit("SET_WORKS", response.data)
-                console.log(response.data)
             })
         },
         addWork({commit}, work){
@@ -29,7 +28,7 @@ export default {
                 formData.append(key, value);
             })
             this.$axios.post('works', formData).catch(error => {
-                console.log(error);
+                this.dispatch("errors/setError", error.message);
             }).then(response => {
                 console.log(response.data);
                 commit("ADD_WORKS", response.data);
@@ -37,7 +36,7 @@ export default {
         },
         deleteWork({commit}, id){
             this.$axios.delete(`works/${id}`).catch(error => {
-                console.log(error);
+                this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit("DELETE_WORK", id);
             })

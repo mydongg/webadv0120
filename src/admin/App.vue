@@ -1,5 +1,8 @@
 <template lang="pug">
-.admin
+.admin(
+  @drop.prevent
+  @dragover.prevent
+)
   //- шапка
   .header__outer
     .wrapper
@@ -26,6 +29,7 @@
             )
             a.nav__link(@click='selectActivePage(page.path)') {{page.name}}
   router-view
+  .error(v-if="errorMessage") {{errorMessage}}
   
 </template>
 
@@ -34,7 +38,7 @@
 import skillsPage from './components/pages/skills';
 import worksPage from './components/pages/works';
 import reviewsPage from './components/pages/reviews';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   data(){
@@ -60,6 +64,11 @@ export default {
   components: {
     skillsPage, worksPage, reviewsPage
   },
+  computed: {
+    ...mapState('errors', {
+      errorMessage: state => state.error
+    })
+  },
   methods: {
     ...mapActions("user", ['logout']),
     selectActivePage(path){
@@ -78,5 +87,23 @@ export default {
 
 <style lang="postcss">
 @import '../styles/admin.pcss';
+
+
+.admin{
+  position: relative;
+}
+
+.error{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    background-color: #cd1515;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
 </style>
 

@@ -15,6 +15,7 @@ export default{
         ADD_REVIEW: (state, review) => state.reviews.push(review),
         DELETE_REVIEW: (state, id) => state.reviews = state.reviews.filter(review => review.id != id),
         UPDATE_REVIEW: (state, review) => {
+            state.reviewItemToUpdate = {};
             state.reviews = state.reviews.map(item => {
                 if(item.id === review.id){
                     item = review;
@@ -25,7 +26,9 @@ export default{
     },
     actions: {
         fetchReviews({commit}){ 
-            this.$axios.get("reviews/266").catch(error => console.log(error)).then(response => {
+            this.$axios.get("reviews/266").catch(error => {
+                this.dispatch("errors/setError", error.message);
+            }).then(response => {
                 commit('SET_REVIEWS', response.data)
             })
         },
@@ -36,27 +39,25 @@ export default{
                 formData.append(key, value);
             })
             this.$axios.post("/reviews", formData).catch(error => {
-                console.log(error);
+                this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit('ADD_REVIEW', response.data);
             })
         },
         deleteReview({commit}, id){
             this.$axios.delete(`reviews/${id}`).catch(error => {
-                console.log(error)
+                this.dispatch("errors/setError", error.message);
             }).then(response => {
                 commit('DELETE_REVIEW', id);
             })
         },
         updateReview({commit}, review){
-            console.log(review);
             this.$axios.post(`reviews/${review.id}`, review).catch(error => {
-                console.log(error)
+                this.dispatch("errors/setError", error);
             }).then(response => {
-                commit('UPDATE_REVIEW', response.data);
+                commit('UPDATE_REVIEW', response.data.review);
             })
         },
-        
         // Action
         // Устанавливает действие для формы
         // пустая строка - форма не отображается
@@ -67,7 +68,6 @@ export default{
         },
         setItemToUpdate({commit}, item){
             commit('SET_REVIEW_ITEM_TO_UPDATE', item);
-            console.log(item);
         }
     }
 }
