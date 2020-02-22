@@ -33,7 +33,7 @@ new Vue({
                 groupCells: true,
                 selectedAttraction: 0.1,
                 friction: 0.5,
-                cellAlign: 'right'          
+                cellAlign: 'left'          
               }
         }
     },

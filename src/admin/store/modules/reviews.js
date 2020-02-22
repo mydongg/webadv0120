@@ -52,7 +52,12 @@ export default{
             })
         },
         updateReview({commit}, review){
-            this.$axios.post(`reviews/${review.id}`, review).catch(error => {
+            const formData = new FormData();
+            Object.keys(review).forEach(key => {
+                const value = review[key];
+                formData.append(key, value);
+            })
+            this.$axios.post(`reviews/${review.id}`, formData).catch(error => {
                 this.dispatch("errors/setError", error);
             }).then(response => {
                 commit('UPDATE_REVIEW', response.data.review);

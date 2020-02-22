@@ -1,6 +1,6 @@
 <template lang="pug">
           form(
-              @submit.prevent="submitForm"
+              @submit.prevent="submitDependsOnAction"
           ).addwork
             .addwork__header
               .addwork__title Редактирование работы
@@ -22,6 +22,8 @@
                           name="inputWorkPreview"
                           id="inputWorkPreview"
                       ).submit--hidden
+                      .input__error
+                        .errorInput Загрузите изображение
                       label(
                           for="inputWorkPreview"
                       ).submit Загрузить
@@ -39,8 +41,6 @@
                       label(
                           for="inputWorkPreview"
                       ).submit Изменить
-                  .selectImage__error
-                    .errorInput Заполните поле
               .addwork__right
                 .addwork__field
                   label.addwork__fieldtitle Название
@@ -48,36 +48,40 @@
                     input.inputtext(
                         type="text"
                         v-model="work.title"
+                        @click="releaseError"
                         )
-                  .addwork__error
-                    .errorInput Заполните поле
+                    .input__error
+                        .errorInput Заполните поле 
                 .addwork__field
                   label.addwork__fieldtitle Ссылка
                   .addwork__input
                     input.inputtext(
                         type="text"
                         v-model="work.link"
+                        @click="releaseError"
                         )
-                    .addwork__error
-                        .errorInput Заполните поле
+                    .input__error
+                        .errorInput Заполните поле 
                 .addwork__field
                   label.addwork__fieldtitle Описание
                   .addwork__textarea
                     textarea.inputfield(
                         type="text"
                         v-model="work.description"
+                        @click="releaseError"
                         )
-                    .addwork__error
-                        .errorInput Заполните поле
+                    .input__error
+                        .errorInput Заполните поле 
                 .addwork__field
                   label.addwork__fieldtitle Добавление тега
                   .addwork__input
                     input.inputtext(
                         type="text"
                         @keydown.enter.prevent="addTech"
+                        @click="releaseError"
                         )
-                    .addwork__error
-                        .errorInput Заполните поле
+                    .input__error
+                        .errorInput Добавьте теги
                 .addwork__tags
                   .tag(
                       v-for="tag in work.techs"
@@ -91,7 +95,7 @@
                 .addwork__control
                   .addwork__reset 
                     button(
-                        @click.prevent="setActionNull"
+                        @click.prevent="setAction('')"
                     ).reset Отмена
                   .addwork__submit
                     button.submit Сохранить 
@@ -113,8 +117,14 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapState('works', {
+            worksAction: state => state.worksAction,
+            worksItemToUpdate: state => state.worksItemToUpdate
+        })
+    },
     methods: {
-        ...mapActions('works', ['addWork', 'setAction']),
+        ...mapActions('works', ['addWork', 'setAction', 'updateWork']),
         ...mapActions('errors', ['setError']),
         handleFile(event){
             const file = event.target.files[0];
@@ -147,17 +157,43 @@ export default {
         },
         addTech(e){
             const adaptedTag = e.target.value.trim();
+            e.target.value = "";
             this.work.techs.push(adaptedTag);
+        },
+        releaseError(e){
+            e.target.classList.remove('input--error');
         },
         removeTech(removedTag){
             const adaptedTag = removedTag.trim()
             this.work.techs = this.work.techs.filter(tech => tech != adaptedTag)
         },
-        submitForm(e){
-            this.addWork(this.work);
-        },
-        setActionNull(){
-            this.setAction('');
+        submitDependsOnAction(e){
+            if(!this.work.title || !this.work.techs || !this.work.photo || !this.work.link || !this.work.description){
+                const formElems = e.target.elements;
+                for (let index = 0; index < formElems.length; index++) {
+                    let currentItem = formElems[index];
+                    currentItem.classList.remove('input--error');
+                    if((currentItem.tagName == 'INPUT' || currentItem.tagName == "TEXTAREA") && !currentItem.value){
+                        currentItem.classList.add('input--error');
+                    }
+                    if(currentItem.type=="file" && this.renderedPhoto){
+                        currentItem.classList.remove('input--error');
+                    }
+                }
+            } else {
+                if(this.worksAction === "add"){
+                    this.addWork(this.work);
+                } else {
+                    this.updateWork(this.work); 
+                }
+                this.setAction("");
+            }
+        }
+    },
+    mounted() {
+        if(this.worksAction == 'update'){
+            this.work = this.worksItemToUpdate;
+            this.renderedPhoto = "https://webdev-api.loftschool.com/"+ this.worksItemToUpdate.photo;
         }
     }
 }
@@ -167,19 +203,8 @@ export default {
 
 .addwork__field{
     position: relative;
-    &--error{
-        .addwork__error{
-            display: block;
-        }
-    }
 }
 
-.addwork__error{
-    display: none;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
 .selectimage{
     position: relative;
@@ -194,6 +219,10 @@ export default {
         .selectImage__error{
             display: block;
         }
+    }
+
+    .input__error{
+        bottom: -50px;
     }
 }
 
@@ -210,13 +239,18 @@ export default {
     position: absolute;
 }
 
-.selectImage__error{
-    display: none;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -50px;
+.input__error{
+  position: absolute;
+  display: none;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
+.input--error{
+    +.input__error{
+        display: block;
+    }
 }
 
 .errorInput{
@@ -225,6 +259,7 @@ export default {
     background-color: #cd1515;
     pointer-events: none;
     z-index: 10;
+    color: #fff;
     &:before{
         content: '';
         position: absolute;

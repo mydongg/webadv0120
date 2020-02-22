@@ -15,7 +15,9 @@
                     a.reset.reset--np(href="#") {{work.link}}
                   .work__controls
                     .work__change
-                      a.controlbutton(href="#")
+                      a.controlbutton(
+                        @click='updateThisWork'
+                      )
                         .controlbutton__text Править
                         .controlbutton__icon
                           svg(class="controlbutton__svg controlbutton__svg--change" preserveAspectRatio="none")
@@ -45,9 +47,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions('works', ['deleteWork']),
+        ...mapActions('works', ['deleteWork', 'setAction', 'setItemToUpdate']),
         deleteThisWork(){
-            this.deleteWork(this.work.id);
+          this.deleteWork(this.work.id);
+        },
+        updateThisWork(){
+          this.setAction('update');
+          let itemToUpdate = Object.assign({}, this.work);
+          itemToUpdate.techs = itemToUpdate.techs.split(',');
+          this.setItemToUpdate(itemToUpdate);
         }
     }
 }
@@ -60,6 +68,5 @@ export default {
     background-position: center center;
     background-size: cover;
 }
-
 
 </style>

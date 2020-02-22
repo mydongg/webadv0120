@@ -2,16 +2,27 @@ export default {
     namespaced: true,
     state: {
         worksAction: "",
-        works: []
+        works: [],
+        worksItemToUpdate: {}
     },
     getters: {
         
     },
     mutations: {
         SET_WORKS: (state, data) => state.works = data,
-        ADD_WORKS: (state, work) => state.works = state.works.push(work),
+        ADD_WORKS: (state, work) => state.works.push(work),
         DELETE_WORK: (state, id) => state.works = state.works.filter(work => work.id != id),
-        SET_ACTION: (state, action) => state.worksAction = action
+        UPDATE_WORK: (state, work) => {
+            state.worksItemToUpdate = {};
+            state.works = state.works.map(item => {
+                if(item.id === work.id){
+                    item = work
+                }
+                return item
+            })
+        },
+        SET_ACTION: (state, action) => state.worksAction = action,
+        SET_WORKS_ITEM_TO_UPDATE: (state, item) => state.worksItemToUpdate = item
     },
     actions: {
         fetchWorks({commit}){
@@ -30,7 +41,6 @@ export default {
             this.$axios.post('works', formData).catch(error => {
                 this.dispatch("errors/setError", error.message);
             }).then(response => {
-                console.log(response.data);
                 commit("ADD_WORKS", response.data);
             })
         },
@@ -41,7 +51,18 @@ export default {
                 commit("DELETE_WORK", id);
             })
         },
-
+        updateWork({commit}, work){
+            const formData = new FormData();
+            Object.keys(work).forEach(key => {
+                const value = work[key];
+                formData.append(key, value);
+            });
+            this.$axios.post(`works/${work.id}`, formData).catch(error => {
+                this.dispatch("errors/setError", error.message);
+            }).then(response => {
+                commit('UPDATE_WORK', response.data.work)
+            })
+        },
         // Actions
         // Устанавливает действие для формы
         // пустая строка - форма не отображается
@@ -49,6 +70,9 @@ export default {
         // update - изменение существующей
         setAction({commit}, action){
             commit('SET_ACTION', action);
+        },
+        setItemToUpdate({commit}, item){
+            commit('SET_WORKS_ITEM_TO_UPDATE', item);
         }
     }
 }

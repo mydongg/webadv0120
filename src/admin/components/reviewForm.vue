@@ -116,6 +116,7 @@ export default {
           const formElems = e.target.elements;
           for (let index = 0; index < formElems.length; index++) {
               let currentItem = formElems[index];
+              currentItem.classList.remove('input--error');
               if((currentItem.tagName == 'INPUT' || currentItem.tagName == "TEXTAREA") && !currentItem.value){
                   currentItem.classList.add('input--error');
               }
@@ -131,8 +132,6 @@ export default {
           }
           this.setAction("");
         }
-
-
     },
     releaseError(e){
         e.target.classList.remove('input--error');
