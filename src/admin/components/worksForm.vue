@@ -156,9 +156,15 @@ export default {
             }
         },
         addTech(e){
-            const adaptedTag = e.target.value.trim();
-            e.target.value = "";
-            this.work.techs.push(adaptedTag);
+            if(!e.target.value){
+                e.target.classList.add('input--error');
+            } else{
+                e.target.classList.remove('input--error');
+                const adaptedTag = e.target.value.trim();
+                e.target.value = "";
+                this.work.techs.push(adaptedTag);
+            }
+            
         },
         releaseError(e){
             e.target.classList.remove('input--error');
