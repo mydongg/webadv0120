@@ -12,7 +12,7 @@
                   .work__title {{work.title}}
                   .work__desc {{work.description}}
                   .work__link
-                    a.reset.reset--np(href="#") {{work.link}}
+                    a.reset.reset--np(:href='work.link') {{work.link}}
                   .work__controls
                     .work__change
                       a.controlbutton(

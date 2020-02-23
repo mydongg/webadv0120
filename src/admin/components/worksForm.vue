@@ -211,7 +211,6 @@ export default {
     position: relative;
 }
 
-
 .selectimage{
     position: relative;
     background-repeat: no-repeat;
@@ -246,36 +245,8 @@ export default {
 }
 
 .input__error{
-  position: absolute;
-  display: none;
-  white-space: nowrap;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.input--error{
-    +.input__error{
-        display: block;
-    }
-}
-
-.errorInput{
-    font-size: 14px;
-    padding: 10px;
-    background-color: #cd1515;
-    pointer-events: none;
-    z-index: 10;
-    color: #fff;
-    &:before{
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: -70%;
-        transform: translateX(-50%);
-        border: 15px solid transparent;
-        border-bottom: 15px solid #cd1515;
-        pointer-events: none;
-    }
 }
 
 </style>

@@ -64,7 +64,11 @@ export default{
                 formData.append(key, value);
             })
             this.$axios.post(`reviews/${review.id}`, formData).catch(error => {
-                this.dispatch("errors/setError", error);
+                if(error.response.status === 404) {
+                    this.dispatch("errors/setError", "Отзыв был удален");
+                } else {
+                    this.dispatch("errors/setError", error);
+                }
             }).then(response => {
                 commit('UPDATE_REVIEW', response.data.review);
                 if(response.status === 200){

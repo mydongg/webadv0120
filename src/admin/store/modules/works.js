@@ -65,7 +65,11 @@ export default {
                 formData.append(key, value);
             });
             this.$axios.post(`works/${work.id}`, formData).catch(error => {
-                this.dispatch("errors/setError", error.message);
+                if(error.response.status === 404) {
+                    this.dispatch("errors/setError", "Работа была удалена");
+                } else {
+                    this.dispatch("errors/setError", error);
+                }
             }).then(response => {
                 commit('UPDATE_WORK', response.data.work);
                 console.log(response);
