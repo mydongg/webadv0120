@@ -18,10 +18,13 @@
 
     &__item{
         width: 30%;
-        margin-right: 3%;
+        margin-right: 5%;
         min-height: 300px;
         box-shadow: 5px 3px 20px 0 rgba(0,0,0,.07);
         margin-bottom: 20px;
+        &:nth-child(3){
+            margin-right: 0;
+        }
     }
 
     &__mainfield{
@@ -31,7 +34,13 @@
     @include tablets{
         &__item{
             width: 48%;
-            margin-right: 2%;
+            margin-right: 4%;
+            &:nth-child(2){
+                margin-right: 0;
+            }
+            &:nth-child(3){
+                margin-right: 4%;
+            }
         }
     }
 
@@ -39,6 +48,9 @@
         &__item{
             width: 100%;
             margin-right: 0;
+            &:nth-child(3){
+                margin-right: 0;
+            }
         }
     }
 }

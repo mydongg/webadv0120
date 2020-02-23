@@ -61,4 +61,8 @@ export default {
 
 <style lang="postcss" scoped>
 
+
+/* Анимация появления отзыва */
+
+
 </style>

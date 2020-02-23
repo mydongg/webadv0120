@@ -29,8 +29,9 @@
             )
             a.nav__link(@click='selectActivePage(page.path)') {{page.name}}
   router-view
-  .error(v-if="errorMessage") {{errorMessage}}
-  .update(v-if="updateMessage") {{updateMessage}}
+  transition(name="notifications")
+    .error(v-if="errorMessage") {{errorMessage}}
+    .update(v-if="updateMessage") {{updateMessage}}
 </template>
 
 
@@ -116,6 +117,27 @@ export default {
   font-weight: 700;
 }
 
+/* Анимация вывода уведомлений */
+
+.notifications-enter{
+  opacity: 0;
+}
+
+.notifications-enter-to{
+  opacity: 1;
+}
+
+.notifications-enter-active, .notifications-leave-active{
+  transition: .4s;
+}
+
+.notifications-leave{
+  opacity: 1;
+}
+
+.notifications-leave-to{
+  opacity: 0;
+}
 
 </style>
 
