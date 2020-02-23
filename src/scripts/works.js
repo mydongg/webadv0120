@@ -7,7 +7,7 @@ const $axios = axios.create({
 
 const preview = {
     template: "#works-previews",
-    props: ["works", "currentWork", "visibleWorks"]
+    props: ["works", "currentWork", "visibleWorks"],
 }
 
 const buttons = {
