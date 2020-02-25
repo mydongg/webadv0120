@@ -5,7 +5,7 @@
 
 ##  Чтобы развернуть проект необходимо:
 ```sh
-$ git clone git@github.com:mydongg/webadv0120.git
+$ git clone https://github.com/mydongg/webadv0120.git
 $ cd ls-advanced-portfolio
 $ yarn
 ```
