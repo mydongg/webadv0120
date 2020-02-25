@@ -117,7 +117,7 @@ export default {
         },
         async addInputSkill(e){
             this.loading = true;
-            if(!this.skill.title || !this.skill.name){
+            if(!this.skill.title || !this.skill.percent){
               const formElems = e.target.elements;
               for (let index = 0; index < formElems.length; index++) {
                 let currentItem = formElems[index];
@@ -131,7 +131,7 @@ export default {
                 this.skill.title = "";
                 this.skill.percent = 0;
               } catch(error){
-
+                
               } finally {
                 this.loading = false;
               }      
